@@ -15,7 +15,8 @@ Bahasa Pemograman :
 
 Petunjuk :
 
-Untuk menginput Data Transaksi, Admin/Karyawan dapat memilih "Banyak" Jenis Layanan Laundry "Sekaligus", kemudian jika sesuai klik Simpan.
+Untuk menginput Data Transaksi, Admin/Karyawan dapat memilih "Banyak" Jenis Layanan Laundry "Sekaligus", 
+kemudian jika sesuai klik Simpan.
 
 Fitur Website :
 1. Template Pullo (Merah Hitam)
