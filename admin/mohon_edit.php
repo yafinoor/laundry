@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><button class="btn btn-danger btn-lg"><a href="transaksi.php" style="color: white; text-decoration: none"> <i class="fa fa-angle-left"></i> Kembali</a></button></h1>
+                <h1 class="page-header"><button class="btn btn-danger btn-lg"><a href="mohon.php" style="color: white; text-decoration: none"> <i class="fa fa-angle-left"></i> Kembali</a></button></h1>
             </div>
         </div>
         <div class="row">
@@ -19,29 +19,24 @@
                                 <input class="form-control" type="text" value="<?= $data['notransaksi'].' - '.$data['nama'] ?>" readonly>
                             </div>
                             <div class="form-group">
-                                <label>Layanan</label>
-                                <select class="form-control" name="layanan" required>
-                                    <option value="<?= $data['layanan'] ?>"><?= $data['layanan'] ?></option>
-                                    <option value="Tidak">Tidak</option>
-                                    <option value="Antar">Antar</option>
-                                </select>
+                                <label>Alamat</label>
+                                <textarea class="form-control" readonly><?= $data['alamat'] ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Total Belanja</label>
-                                <input class="form-control" type="number" value="<?= $data['total']-$data['ongkir'] ?>" readonly>
-                                <input type="hidden" name="ongkirLama" value="<?= $data['ongkir'] ?>">
-                                <input type="hidden" name="total" value="<?= $data['total'] ?>">
+                                <label>Layanan</label>
+                                <input class="form-control" type="text" value="<?= $data['layanan'] ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label>Ongkir</label>
-                                <input class="form-control" type="number" name="ongkir" value="<?= $data['ongkir'] ?>" required>
+                                <input class="form-control" type="number" name="ongkir" min="1000" value="<?= $data['ongkir'] ?>" required>
+                                <input type="hidden" name="total" value="<?= $data['total'] ?>">
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status" required>
-                                    <option value="<?= $data['status'] ?>"><?= $data['status'] ?></option>
-                                    <option value="Proses">Proses</option>
-                                    <option value="Selesai">Selesai</option>
+                                <label>Konfirmasi</label>
+                                <select class="form-control" name="konfirmasi" required>
+                                    <option value="<?= $data['konfirmasi'] ?>"><?= $data['konfirmasi'] ?></option>
+                                    <option value="Diterima">Diterima</option>
+                                    <option value="Ditolak">Ditolak</option>
                                 </select>
                             </div>
                             <button type="submit" name="simpan" class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Ubah</button>
@@ -63,12 +58,11 @@
 <?php require('bawah.php') ?>
 <?php
   if (isset($_POST['simpan'])) {
-    $total       = $_REQUEST['total']-$_REQUEST['ongkirLama']+$_REQUEST['ongkir'];
-    $layanan     = $_REQUEST['layanan'];
+    $total       = $_REQUEST['total']+$_REQUEST['ongkir'];
     $ongkir      = $_REQUEST['ongkir'];
-    $status      = $_REQUEST['status'];
+    $konfirmasi  = $_REQUEST['konfirmasi'];
 
-    $ubah = mysqli_query($kon,"UPDATE transaksi SET total = '$total', layanan = '$layanan', ongkir = '$ongkir', status = '$status' WHERE notransaksi = '$notransaksi'");
-    ?> <script>alert("Berhasil Diubah");window.location='transaksi.php';</script> <?php
+    $ubah = mysqli_query($kon,"UPDATE transaksi SET total = '$total', ongkir = '$ongkir', konfirmasi = '$konfirmasi' WHERE notransaksi = '$notransaksi'");
+    ?> <script>alert("Berhasil Diubah, Cek Data Transaksi");window.location='mohon.php';</script> <?php
   }
 ?>

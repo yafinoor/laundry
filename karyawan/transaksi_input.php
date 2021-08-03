@@ -103,8 +103,6 @@
                                 <label>Layanan</label>
                                 <select name="layanan" id="layanan" class="form-control">
                                     <option value="Tidak">Tidak</option>
-                                    <option value="Antar Jemput">Antar Jemput</option>
-                                    <option value="Jemput">Jemput</option>
                                     <option value="Antar">Antar</option>
                                 </select>
                             </div>

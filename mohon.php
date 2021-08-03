@@ -1,33 +1,51 @@
 <?php require('header.php') ?>
 	</div>
-  <div class="collection_text">DAFTAR LAUNDRY</div>
+  <div class="collection_text">PERMOHONAN ANTAR JEMPUT</div>
     <div class="layout_padding collection_section">
     	<div class="container">
            <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="table-responsive">
+                        <button class="btn btn-success btn-lg"><a href="mohon_input.php" style="color: white; text-decoration: none">+ tambah</a></button>
                         <table class="table table-bordered table-hover " id="dataTables-example">
                             <thead class="success table-dark">
                                 <tr>
                                     <th>No</th>
-                                        <th>Jenis</th>
-                                        <th>Sub Jenis</th>
-                                        <th>Harga (Rp)</th>
-                                        <th>Keterangan</th>
+                                    <th>Waktu (WITA)</th>
+                                    <th>No.Transaksi</th>
+                                    <th>Total</th>
+                                    <th>Ongkir</th>
+                                    <th>Layanan</th>
+                                    <th>Catatan</th>
+                                    <th>Konfirmasi</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM jenis ORDER BY jenis ASC");
+                            <tbody class="table-light">
+                                    <?php $no=1; 
+                                    $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' AND konfirmasi = 'Menunggu' ORDER BY tgl DESC");
                                         while($data = mysqli_fetch_array($query)){ ?>
-                                            <tr class="odd gradeX" style="color: black;">
+                                            <tr class="odd gradeX" style="color:black">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['jenis'] ?></td>
-                                                    <td><?= $data['subjenis'] ?></td>
-                                                    <td><?= number_format($data['harga'],0,'.','.') ?></td>
-                                                    <td><?= $data['ket'] ?></td>
+                                                    <td><?= date('d/m/Y, H:i',strtotime($data['tgl'])) ?></td>
+                                                    <td>
+                                                        <a href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
+                                                    </td>
+                                                    <td>Rp. <?= number_format($data['total'],0,'.','.') ?></td>
+                                                    <td>Rp. <?= number_format($data['ongkir'],0,'.','.') ?></td>
+                                                    <td><?= $data['layanan'] ?></td>
+                                                    <td><?= $data['catatan'] ?></td>
+                                                    <td><?= $data['konfirmasi'] ?></td>
+                                                    <td><a href="mohon_batal.php?notransaksi=<?php echo $data['notransaksi'] ?>" class="btn btn-outline btn-danger btn-sm">Hapus</a></td>
                                                 </tr>
-                                        <?php } ?>
-                                          
+                                        <?php } ?> 
+                                    <?php if(mysqli_num_rows($query)<=0){
+                                        ?>
+                                            <tr class="odd gradeX" style="color:black">
+                                                <td colspan="11"><h1 class="text-center">Tidak Ada Permohonan Antar Jemput</h1></td>
+                                            </tr>
+                                        <?php
+                                    } ?>
                                 </tbody>
                         </table>
                         <br>

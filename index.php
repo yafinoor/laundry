@@ -2,72 +2,45 @@
 	</div>
 <style>
     body{
-        background-image: url(images/ya.jpg);
+        background-image: url(images/ya1.jpg);
         background-repeat: no-repeat;
         background-size: cover;
-        background-position-y: -100px;
+        background-position-y: 110px;
     };
 </style>
-<?php if($memori['nama']){ ?>
-  <div class="collection_text">Selamat Datang <?= $memori['nama'] ?></div>
-    <div class="layout_padding collection_section">
-    	<div class="container">
-           <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover " id="dataTables-example">
-                            <thead class="success table-dark">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Waktu (WITA)</th>
-                                    <th>No.Transaksi <br>& Nama Pelanggan</th>
-                                    <th>Sub Total</th>
-                                    <th>Ongkir</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Layanan</th>
-                                    <th>Catatan</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-light">
-                                    <?php $no=1; 
-                                    $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' ORDER BY tgl DESC");
-                                        while($data = mysqli_fetch_array($query)){ ?>
-                                            <tr class="odd gradeX" style="color:black">
-                                                    <td><?= $no++; ?></td>
-                                                    <td><?= date('d/m/Y,H:i',strtotime($data['tgl'])) ?></td>
-                                                    <td>
-                                                        <a href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
-                                                        <?= $data['nama'] ?>
-                                                    </td>
-                                                    <td><?= number_format($data['total']-$data['ongkir'],0,'.','.') ?></td>
-                                                    <td><?= number_format($data['ongkir'],0,'.','.') ?></td>
-                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
-                                                    <td><a style="color: blue" target="_blank" href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>"><?= $data['status'] ?></a></td>
-                                                    <td><?= $data['layanan'] ?></td>
-                                                    <td><?= $data['catatan'] ?></td>
-                                                </tr>
-                                        <?php } ?> 
-                                    <?php if(mysqli_num_rows($query)<=0){
-                                        ?>
-                                            <tr class="odd gradeX" style="color:black">
-                                                <td colspan="9"><h1 class="text-center">Tidak Ada Transaksi</h1></td>
-                                            </tr>
-                                        <?php
-                                    } ?>
-                                </tbody>
-                        </table>
+        <div class="container">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="best_shoes">
+                        <p class="best_text">Jam Kerja (WITA)</p>
+                        <div class="shoes_icon">
+                            <img src="images/thumb1.jpg" style="margin-left: 10px;">
+                        </div>
                     </div>
-                                
                 </div>
-                <!-- /.panel-body -->
-            </div>
-    	</div>
-    </div>
-<?php } ?>
-
-
-
+                <div class="col-sm-4">
+                    <div class="best_shoes">
+                        <p class="best_text">Permohonan Antar Jemput</p>
+                        <div class="shoes_icon">
+                            <img src="images/thumb2.jpg" style="margin-left: 10px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="best_shoes">
+                        <p class="best_text"><i>Waktunya Laundry</i></p>
+                        <div class="shoes_icon">
+                            <img src="images/thumb3.jpg" style="margin-left: 10px;">
+                        </div>
+                    </div>
+                </div>
+        </div>
       <!-- Javascript files-->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>

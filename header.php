@@ -32,23 +32,24 @@
 	<div class="header_section">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="logo"><a href="#"><img src="images/logo.png" width="80px"></a></div>
+				<div class="col-sm-1">
+					<div class="logo"><a href="index.php"><img src="images/logo.png" width="80px"></a></div>
 				</div>
-				<div class="col-sm-9">
+				<div class="col-sm-11">
 					<nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                         </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                           <a class="nav-item nav-link" href="index.php">Home</a>
                            <a class="nav-item nav-link" href="daftar.php">Daftar Laundry</a>
                            <a class="nav-item nav-link" href="promo.php">Promo</a>
-                           <a class="nav-item nav-link" href="lokasi.php">Lokasi</a>
                            <?php if($memori['level']=='Pelanggan'){ ?>
+                              <a class="nav-item nav-link" href="transaksi.php">Transaksi</a>
+                              <a class="nav-item nav-link" href="mohon.php">Permohonan Antar Jemput</a>
                               <a class="nav-item nav-link" href="keluar.php">Keluar</a>
                            <?php }else{ ?>
+                           <a class="nav-item nav-link" href="lokasi.php">Lokasi</a>
                               <a class="nav-item nav-link" href="masuk.php">Masuk</a>
                            <?php } ?>
                         </div>

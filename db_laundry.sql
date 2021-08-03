@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2021 at 03:26 AM
+-- Generation Time: Aug 04, 2021 at 12:49 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -40,7 +40,7 @@ CREATE TABLE `biaya` (
 --
 
 INSERT INTO `biaya` (`idbiaya`, `tgl`, `ket`, `total`) VALUES
-(1, '2021-07-22', 'Listrik', 100000);
+(1, '2021-08-09', 'Listrik', 100000);
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,11 @@ CREATE TABLE `detail` (
 INSERT INTO `detail` (`iddetail`, `notransaksi`, `jenisny`, `subjenisny`, `jumlah`, `hargany`, `subharga`) VALUES
 (27, '2021080219', 'Cuci Kiloan', 'Cuci Basah', 3, 5000, 15000),
 (28, '2021080247', 'Cuci Satuan', 'Bad Cover Besar', 3, 18000, 54000),
-(29, '2021080247', 'Cuci Satuan', 'Cuci Saja', 4, 2000, 8000);
+(29, '2021080247', 'Cuci Satuan', 'Cuci Saja', 4, 2000, 8000),
+(31, '2021080317', 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 1, 10000, 10000),
+(32, '2021080317', 'Cuci Satuan', 'Cuci Kering Setrika', 3, 3500, 10500),
+(34, '2021080353', 'Cuci Kiloan', 'Cuci Basah', 3, 5000, 15000),
+(35, '2021080353', 'Cuci Satuan', 'Cuci Kering Setrika', 1, 3500, 3500);
 
 -- --------------------------------------------------------
 
@@ -85,7 +89,8 @@ CREATE TABLE `gaji` (
 --
 
 INSERT INTO `gaji` (`idgaji`, `id`, `tgl`, `total`) VALUES
-(1, 4, '2021-07-23', 800000);
+(1, 4, '2021-07-23', 600000),
+(2, 8, '2021-08-04', 600000);
 
 -- --------------------------------------------------------
 
@@ -298,7 +303,9 @@ INSERT INTO `proses` (`idproses`, `notransaksi`, `waktu`, `ket`, `karyawan`) VAL
 (8, '2021080219', '2021-08-03 08:15:00', 'Disetrika oleh', 'Amelia'),
 (9, '2021080247', '2021-08-03 05:51:00', 'Dicuci oleh', 'Tretan'),
 (10, '2021080247', '2021-08-03 07:52:00', 'Disetrika oleh', 'Amelia'),
-(11, '2021080247', '2021-08-03 10:52:00', 'Dipacking dan siap diantar oleh', 'Ace');
+(11, '2021080247', '2021-08-03 10:52:00', 'Dipacking dan siap diantar oleh', 'Ace'),
+(12, '2021080353', '2021-08-04 07:25:00', 'Dicuci oleh', 'Tretan'),
+(13, '2021080353', '2021-08-04 08:25:00', 'Dikeringkan oleh', 'Amelia');
 
 -- --------------------------------------------------------
 
@@ -314,16 +321,19 @@ CREATE TABLE `transaksi` (
   `status` varchar(100) NOT NULL,
   `layanan` varchar(20) NOT NULL,
   `ongkir` float NOT NULL,
-  `catatan` varchar(100) NOT NULL
+  `catatan` varchar(100) NOT NULL,
+  `konfirmasi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`notransaksi`, `id`, `tgl`, `total`, `status`, `layanan`, `ongkir`, `catatan`) VALUES
-('2021080219', 3, '2021-08-02 23:07:00', 23500, 'Proses', 'Tidak', 8500, '-'),
-('2021080247', 7, '2021-08-02 23:51:00', 72000, 'Selesai', 'Antar Jemput', 10000, '-');
+INSERT INTO `transaksi` (`notransaksi`, `id`, `tgl`, `total`, `status`, `layanan`, `ongkir`, `catatan`, `konfirmasi`) VALUES
+('2021080219', 3, '2021-08-02 23:07:00', 23500, 'Proses', 'Tidak', 8500, '-', 'Diterima'),
+('2021080247', 7, '2021-08-02 23:51:00', 72000, 'Selesai', 'Antar Jemput', 10000, '-', 'Diterima'),
+('2021080317', 5, '2021-08-03 18:26:00', 27500, 'Proses', 'Jemput', 7000, 'jangan dipaksa mun hujan harinya', 'Diterima'),
+('2021080353', 3, '2021-08-03 22:22:00', 23500, 'Proses', 'Antar', 5000, '-', '');
 
 -- --------------------------------------------------------
 
@@ -456,13 +466,13 @@ ALTER TABLE `biaya`
 -- AUTO_INCREMENT for table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `iddetail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `iddetail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `gaji`
 --
 ALTER TABLE `gaji`
-  MODIFY `idgaji` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idgaji` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `inventori`
@@ -504,7 +514,7 @@ ALTER TABLE `promo`
 -- AUTO_INCREMENT for table `proses`
 --
 ALTER TABLE `proses`
-  MODIFY `idproses` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idproses` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`

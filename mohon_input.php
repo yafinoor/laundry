@@ -1,9 +1,9 @@
-<?php require('atas.php'); error_reporting(0); ?>
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
+<?php require('header.php') ?>
+	</div>
+    <div class="container">
+        <br><br><br><br><br><br><div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Tambah Transaksi</h2>
+                <h2>Tambah Permohonan Antar Jemput</h2>
             </div>
         </div>
         <div class="row">
@@ -11,9 +11,8 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                          <form role="form" action="" method="POST">
-                            <div class="form-group">
                                 <label>Jenis Laundry</label>
-                                <select name="idjenis" class="form-control" onchange='ubah(this.value)' required>
+                                <select name="idjenis" onchange='ubah(this.value)' class="email-bt" required>
                                     <option>Pilih</option>
                                   <?php
                                     $rendi = mysqli_query($kon, "SELECT * FROM jenis ORDER BY jenis ASC");
@@ -26,14 +25,11 @@
                                       } 
                                     ?>
                                 </select>
-                            </div>
-                            <div class="form-group">
                                 <label>Harga</label>
-                                <input type="number" name="harga" id="harga" class="form-control" readonly>
-                            </div>
+                                <input type="number" class="email-bt form-control" name="harga" id="harga" readonly>
                             <div class="form-group">
                                 <label>Jumlah</label>
-                                <input type="number" name="jumlahku" class="form-control" required>
+                                <input type="number" name="jumlahku" class="email-bt form-control" required>
                             </div>
                             <button type="submit" name="tambah" class="btn btn-outline btn-primary">Tambah</button>
                             <button type="button" class="btn btn-outline btn-default"><a href="transaksi_bersih.php" style="color: black; text-decoration: none">Bersihkan Daftar Belanja</a></button>
@@ -44,12 +40,12 @@
                 <!-- /.panel -->
             </div>
             <div class="col-lg-8">
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="color: black;">
                     <div class="panel-body">
                          <form role="form" action="" method="POST">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="dataTables-example">
-                                    <thead class="success">
+                                    <thead class="success table-dark">
                                         <tr>
                                             <th>No</th>
                                             <th>Jenis Laundry</th>
@@ -72,7 +68,7 @@
                                                 <td><?= $data['harga'] ?></td>
                                                 <td><?= $jumlah ?></td>
                                                 <td>Rp. <?= $subharga ?></td>
-                                                <td> <a href="transaksi_hapus.php?idjenis=<?php echo $data['idjenis'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a> </td>
+                                                <td> <a href="mohon_hapus.php?idjenis=<?php echo $data['idjenis'] ?>" class="btn btn-outline btn-danger btn-sm">hapus</a> </td>
                                             </tr>
                                         <?php $totalbelanja+=$subharga; ?>
                                         <?php endforeach ?>  
@@ -88,31 +84,15 @@
                                 </table>
                             </div>
                             <div class="form-group">
-                                <label>Nama Pelanggan</label>
-                                <select name="id" class="form-control" required>
-                                    <option value="">Pilih</option>
-                                  <?php
-                                    $rendi = mysqli_query($kon, "SELECT * FROM user WHERE level = 'Pelanggan' ORDER BY nama ASC");
-                                      while($haikal = mysqli_fetch_array($rendi)) {
-                                        echo "<option value='$haikal[id]'>$haikal[nama]</option>";
-                                      } 
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label>Layanan</label>
-                                <select name="layanan" id="layanan" class="form-control">
-                                    <option value="Tidak">Tidak</option>
-                                    <option value="Antar">Antar</option>
+                                <select name="layanan" id="layanan" class="email-bt">
+                                    <option value="Antar Jemput">Antar Jemput</option>
+                                    <option value="Jemput">Jemput</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Biaya Ongkir</label>
-                                <input type="number" name="ongkir" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
-                                <textarea class="form-control" name="catatan" required></textarea>
+                                <textarea class="email-bt" name="catatan" required style="height: 105px;"></textarea>
                             </div>
                             
                             <button type="submit" name="simpan" class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Simpan</button>
@@ -126,12 +106,23 @@
         </div>
     </div>
     <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-<?php require('bawah.php') ?>
 
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+      <script src="js/plugin.js"></script>
+      <script>   
+        <?php echo $a;echo $b; ?>
+            function ubah(id){  
+            document.getElementById('harga').value = harga[id].harga; 
+        }; 
+        var hiding = document.querySelectorAll('.nice-select');
+        hiding.forEach(function(e){ e.style.display = 'none'; });  
+    </script> 
+   </body>
+</html>
 <?php
     date_default_timezone_set('Asia/Kuala_Lumpur');
     if (isset($_POST['tambah'])) {
@@ -144,9 +135,7 @@
           $_SESSION['keranjang'][$idjenis] = $jumlahku;
         }
 
-        echo "<script>window.location = 'transaksi_input.php';</script><pre>";
-        print_r($_SESSION['keranjang']);
-        echo "</pre>";
+        echo "<script>window.location = 'mohon_input.php';</script>";
     }
 
     if (isset($_POST['simpan'])) {
@@ -154,11 +143,9 @@
         $tgl         = date('Y-m-d\TH:i');
         $layanan     = $_REQUEST['layanan'];
         $catatan     = $_REQUEST['catatan'];
-        $ongkir      = $_REQUEST['ongkir'];
         $notransaksi = date('Ymds');
-        $seluruh     = $totalbelanja + $ongkir;
 
-        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,status,ongkir) VALUES ('$notransaksi','$id','$seluruh','$tgl','$layanan','$catatan','Proses','$ongkir')");
+        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,status,konfirmasi) VALUES ('$notransaksi','$memori[id]','$totalbelanja','$tgl','$layanan','$catatan','Proses','Menunggu')");
 
         foreach ($_SESSION['keranjang'] as $idjenis => $jumlah) {
             $query      = mysqli_query($kon, "SELECT * FROM jenis WHERE idjenis = '$idjenis'");
@@ -172,17 +159,10 @@
         }
 
         if($hasil){
-            ?> <script>alert('Pembelian Sukses.'); window.location = 'transaksi.php';</script><?php
+            ?> <script>alert('Pembelian Sukses.'); window.location = 'mohon.php';</script><?php
             unset($_SESSION['keranjang']);
         }else{
-            ?> <script>alert('Gagal, cek kembali!.'); window.location = 'transaksi_input.php';</script><?php
+            ?> <script>alert('Gagal, cek kembali!.'); window.location = 'mohon_input.php';</script><?php
         }
     }
-?>
-
-<script>   
-  <?php echo $a;echo $b; ?>
-  function ubah(id){  
-    document.getElementById('harga').value = harga[id].harga; 
-  };   
-</script> 
+ ?>

@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-lg-12">
             <h3 class="page-header">Detail/No. Transaksi : <?= $notransaksi ?></h3>
-            <button class="btn btn-danger"><a style="color:white; text-decoration: none;" href="transaksi.php">Kembali</a></button>
-            <button class="btn btn-primary"><a style="color:white; text-decoration: none;" href="cetaknota.php">Cetak Nota</a></button>
+            <button class="btn btn-danger" onclick="history.back()">Kembali</button>
+            <button class="btn btn-primary"><a style="color:white; text-decoration: none;" href="../report/cetaknota.php?notransaksi=<?= $notransaksi ?>" target="_blank">Cetak Nota</a></button>
         </div>
     </div><br>
     <div class="row">
@@ -21,8 +21,8 @@
                                     <th>Jenis</th>
                                     <th>Sub Jenis</th>
                                     <th>Jumlah</th>
-                                    <th>Harga</th>
-                                    <th>Sub Harga</th>
+                                    <th>Harga (Rp)</th>
+                                    <th>Sub Harga (Rp)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,8 +33,8 @@
                                                 <td><?= $data['jenisny'] ?></td>
                                                 <td><?= $data['subjenisny'] ?></td>
                                                 <td><?= $data['jumlah'] ?></td>
-                                                <td><?= $data['hargany'] ?></td>
-                                                <td><?= $data['subharga'] ?></td>
+                                                <td><?= number_format($data['hargany'],0,'.','.')  ?></td>
+                                                <td><?= number_format($data['subharga'],0,'.','.')  ?></td>
                                             </tr>
                                     <?php } ?>   
                             </tbody>

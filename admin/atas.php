@@ -105,11 +105,24 @@
                 <a href="transaksi.php"><i class="fa fa-get-pocket fa-fw"></i> Transaksi</a>
             </li>
             <li>
+                <a href="mohon.php"><i class="fa fa-get-pocket fa-fw"></i> Permohonan Antar Jemput</a>
+            </li>
+            <li>
                 <a href="promo.php"><i class="fa fa-heart fa-fw"></i> Promo</a>
             </li>
-            
             <li>
-                <a href="pendapatan.php"><i class="fa fa-archive fa-fw"></i> Pendapatan</a>
+                <a href="#"><i class="fa fa-archive fa-fw"></i> Pendapatan<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="pendapatan2.php"><i class="fa fa-battery-1 fa-fw"></i> Harian</a>
+                    </li>
+                    <li>
+                        <a href="pendapatan.php"><i class="fa fa-battery-3 fa-fw"></i> Bulanan</a>
+                    </li>
+                    <li>
+                        <a href="pendapatan1.php"><i class="fa fa-battery-4 fa-fw"></i> Tahunan</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

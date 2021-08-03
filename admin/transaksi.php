@@ -78,7 +78,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id ORDER BY tgl DESC");
+                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE konfirmasi != 'Menunggu' ORDER BY tgl DESC");
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>

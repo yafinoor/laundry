@@ -1,6 +1,6 @@
-<?php require('header.php') ?>
+<?php require('header.php');?>
 	</div>
-  <div class="collection_text">DAFTAR LAUNDRY</div>
+  <div class="collection_text">Data Transaksi Anda</div>
     <div class="layout_padding collection_section">
     	<div class="container">
            <div class="panel panel-default">
@@ -10,29 +10,43 @@
                             <thead class="success table-dark">
                                 <tr>
                                     <th>No</th>
-                                        <th>Jenis</th>
-                                        <th>Sub Jenis</th>
-                                        <th>Harga (Rp)</th>
-                                        <th>Keterangan</th>
+                                    <th>Waktu (WITA)</th>
+                                    <th>No.Transaksi</th>
+                                    <th>Sub Total</th>
+                                    <th>Ongkir</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Layanan</th>
+                                    <th>Catatan</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM jenis ORDER BY jenis ASC");
+                            <tbody class="table-light">
+                                    <?php $no=1; 
+                                    $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' AND konfirmasi = 'Diterima' ORDER BY tgl DESC");
                                         while($data = mysqli_fetch_array($query)){ ?>
-                                            <tr class="odd gradeX" style="color: black;">
+                                            <tr class="odd gradeX" style="color:black">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['jenis'] ?></td>
-                                                    <td><?= $data['subjenis'] ?></td>
-                                                    <td><?= number_format($data['harga'],0,'.','.') ?></td>
-                                                    <td><?= $data['ket'] ?></td>
+                                                    <td><?= date('d/m/Y,H:i',strtotime($data['tgl'])) ?></td>
+                                                    <td>
+                                                        <a href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
+                                                    </td>
+                                                    <td><?= number_format($data['total']-$data['ongkir'],0,'.','.') ?></td>
+                                                    <td><?= number_format($data['ongkir'],0,'.','.') ?></td>
+                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
+                                                    <td><a style="color: blue" target="_blank" href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>"><?= $data['status'] ?></a></td>
+                                                    <td><?= $data['layanan'] ?></td>
+                                                    <td><?= $data['catatan'] ?></td>
                                                 </tr>
-                                        <?php } ?>
-                                          
+                                        <?php } ?> 
+                                    <?php if(mysqli_num_rows($query)<=0){
+                                        ?>
+                                            <tr class="odd gradeX" style="color:black">
+                                                <td colspan="9"><h1 class="text-center">Tidak Ada Transaksi</h1></td>
+                                            </tr>
+                                        <?php
+                                    } ?>
                                 </tbody>
                         </table>
-                        <br>
-                        <br>
-                        <br>
                     </div>
                                 
                 </div>
@@ -40,6 +54,8 @@
             </div>
     	</div>
     </div>
+
+
 
       <!-- Javascript files-->
       <script src="js/jquery.min.js"></script>

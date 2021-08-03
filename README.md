@@ -22,8 +22,8 @@ Fitur Website :
 1. Template Pullo (Merah Hitam)
 2. Template Admin Starmin 
 3. Multi User (Admin, Karyawan, Pelanggan)
-4. Halaman Utama (Home, Promo, Lokasi dan Masuk)
+4. Halaman Utama (Home, Daftar Laundry, Promo, Lokasi dan Masuk)
 5. Data Master terdiri dari : User, Jenis Laundry, Inventori dan Biaya Pengeluaran
-6. Data Report terdiri dari : Gaji Karyawan, Inventori Masuk, Inventori Rusak, Transaksi, Pendapatan, Promo, Grafik
+6. Data Report terdiri dari : Gaji Karyawan, Inventori Masuk, Inventori Rusak, Inventori Perbaikan, Transaksi, Pendapatan, Promo, Nota
 7. Alert Standar
 8. CRUD Standar
