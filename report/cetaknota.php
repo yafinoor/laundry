@@ -1,5 +1,5 @@
 <?php 
-	require "../kon.php"; require('../tgl_indo.php');
+	require "../kon.php"; require('../tgl_indo.php'); error_reporting(0);
 	$notransaksi = $_GET['notransaksi'];
 	$detail = mysqli_query($kon, "SELECT * FROM detail WHERE notransaksi = '$notransaksi' ORDER BY jenisny ASC");
 	$transaksi = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE notransaksi = '$notransaksi'");
