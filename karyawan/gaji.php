@@ -25,9 +25,9 @@
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['tgl'] ?></td>
+                                                    <td><?= tgl_indo($data['tgl']) ?></td>
                                                     <td><?= $data['nama'] ?></td>
-                                                    <td><?= $data['total'] ?></td>
+                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
                                                 </tr>
                                         <?php } ?>
                                           

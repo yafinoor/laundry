@@ -2,7 +2,7 @@
     $rusak= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM inventorirusak"));
     $gaji= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM gaji WHERE id = '$memori[id]'"));
     $transaksi= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM transaksi"));
-    $promo= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM promo"));
+    $user= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM user WHERE level = 'Pelanggan'"));
 ?>
 
 <div id="page-wrapper">
@@ -15,6 +15,20 @@
         </div>
         <!-- /.row -->
         <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="hero-widget well well-sm">
+                    <div class="icon">
+                        <i class="fa fa-user-secret"></i>
+                    </div>
+                    <div class="text">
+                        <span class="value"><?= $user ?></span>
+                        <label class="text-muted">Data Pelanggan</label>
+                    </div>
+                    <div class="options">
+                        <a href="user.php" class="btn btn-primary btn-lg">Lihat Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-6">
                 <div class="hero-widget well well-sm">
                     <div class="icon">
@@ -54,20 +68,6 @@
                     </div>
                     <div class="options">
                         <a href="transaksi.php" class="btn btn-primary btn-lg">Lihat Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="hero-widget well well-sm">
-                    <div class="icon">
-                        <i class="fa fa-heart"></i>
-                    </div>
-                    <div class="text">
-                        <span class="value"><?= $promo ?></span>
-                        <label class="text-muted">Data Promo</label>
-                    </div>
-                    <div class="options">
-                        <a href="promo.php" class="btn btn-primary btn-lg">Lihat Selengkapnya</a>
                     </div>
                 </div>
             </div>

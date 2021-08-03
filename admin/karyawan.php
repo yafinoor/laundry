@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><button class="btn btn-success btn-lg"><a href="jenis_input.php" style="color: white; text-decoration: none">+Data Jenis Laundry</a></button></h1>
+                <h1 class="page-header"><button class="btn btn-success btn-lg"><a href="karyawan_input.php" style="color: white; text-decoration: none">+Data Karyawan</a></button></h1>
             </div>
         </div>
         <div class="row">
@@ -15,25 +15,31 @@
                                 <thead class="success">
                                     <tr>
                                         <th>No</th>
-                                        <th>Jenis</th>
-                                        <th>Sub Jenis</th>
-                                        <th>Harga (Rp)</th>
-                                        <th>Keterangan</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Username</th>
+                                        <th>Tugas</th>
+                                        <th>TTL</th>
+                                        <th>Telp</th>
+                                        <th>Alamat</th>
+                                        <th>Gender</th>
                                         <th><i class="fa fa-toggle-on"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM jenis ORDER BY jenis ASC");
+                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM user WHERE level = 'Karyawan' ORDER BY nama ASC");
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['jenis'] ?></td>
-                                                    <td><?= $data['subjenis'] ?></td>
-                                                    <td><?= number_format($data['harga'],0,'.','.') ?></td>
-                                                    <td><?= $data['ket'] ?></td>
+                                                    <td><?= $data['nama'] ?></td>
+                                                    <td><?= $data['username'] ?></td>
+                                                    <td><?= $data['tugas'] ?></td>
+                                                    <td><?= $data['ttl'] ?></td>
+                                                    <td><?= $data['telp'] ?></td>
+                                                    <td><?= $data['alamat'] ?></td>
+                                                    <td><?= $data['jk'] ?></td>
                                                     <td>
-                                                        <a href="jenis_edit.php?idjenis=<?php echo $data['idjenis']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-                                                        <a href="delete.php?idjenis=<?php echo $data['idjenis'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                        <a href="karyawan_edit.php?id=<?php echo $data['id']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                                        <a href="delete.php?id=<?php echo $data['id'] ?>&level=karyawan" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                         <?php } ?>

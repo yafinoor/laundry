@@ -1,4 +1,4 @@
-<?php require('atas.php') ?>
+<?php require('atas.php'); ?>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -26,9 +26,9 @@
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['tgl'] ?></td>
+                                                    <td><?= tgl_indo($data['tgl']) ?></td>
                                                     <td><?= $data['ket'] ?></td>
-                                                    <td><?= $data['total'] ?></td>
+                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
                                                     <td>
                                                         <a href="biaya_edit.php?idbiaya=<?php echo $data['idbiaya']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                                                         <a href="delete.php?idbiaya=<?php echo $data['idbiaya'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>

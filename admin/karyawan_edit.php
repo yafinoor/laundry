@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><button class="btn btn-danger btn-lg"><a href="user.php" style="color: white; text-decoration: none"> <i class="fa fa-angle-left"></i> Kembali</a></button></h1>
+                <h1 class="page-header"><button class="btn btn-danger btn-lg"><a href="karyawan.php" style="color: white; text-decoration: none"> <i class="fa fa-angle-left"></i> Kembali</a></button></h1>
             </div>
         </div>
         <div class="row">
@@ -29,6 +29,10 @@
                             <div class="form-group">
                                 <label>Telp</label>
                                 <input class="form-control" name="telp" value="<?= $data['telp'] ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tugas</label>
+                                <input class="form-control" name="tugas" value="<?= $data['tugas'] ?>" required>
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
@@ -58,18 +62,19 @@
 <?php require('bawah.php') ?>
 <?php
   if (isset($_POST['simpan'])) {
-    $user       = $_REQUEST['user'];
-    $nama       = $_REQUEST['nama'];
-    $ttl        = $_REQUEST['ttl'];
-    $telp       = $_REQUEST['telp'];
-    $alamat     = $_REQUEST['alamat'];
-    $jk         = $_REQUEST['jk'];
+    $user   = $_REQUEST['user'];
+    $nama   = $_REQUEST['nama'];
+    $ttl    = $_REQUEST['ttl'];
+    $telp   = $_REQUEST['telp'];
+    $alamat = $_REQUEST['alamat'];
+    $jk     = $_REQUEST['jk'];
+    $tugas  = $_REQUEST['tugas'];
 
-    $ubah = mysqli_query($kon,"UPDATE user SET username = '$user', nama = '$nama', ttl = '$ttl', telp = '$telp', alamat = '$alamat', jk = '$jk' WHERE id = '$id'");
+    $ubah = mysqli_query($kon,"UPDATE user SET username = '$user', nama = '$nama', ttl = '$ttl', telp = '$telp', alamat = '$alamat', jk = '$jk', tugas = '$tugas' WHERE id = '$id'");
     if($ubah){
-      ?> <script>alert("Berhasil Diubah");window.location='user.php';</script> <?php
+      ?> <script>alert("Berhasil Diubah");window.location='karyawan.php';</script> <?php
     }else{
-      ?> <script>alert("Gagal Diubah");window.location='user.php';</script> <?php
+      ?> <script>alert("Gagal Diubah");window.location='karyawan.php';</script> <?php
     }
   }
 ?>

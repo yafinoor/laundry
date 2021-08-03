@@ -6,9 +6,11 @@ require "../kon.php";
 		$result = mysqli_query($kon, "SELECT * FROM promo INNER JOIN jenis ON promo.idjenis = jenis.idjenis  WHERE MONTH(waktu1) = '$bulan' AND YEAR(waktu1) = '$tahun' ORDER BY waktu1 ASC");
 	}else if($tahun AND empty($bulan)){
 		$result = mysqli_query($kon, "SELECT * FROM promo INNER JOIN jenis ON promo.idjenis = jenis.idjenis  WHERE YEAR(waktu1) = '$tahun' ORDER BY waktu1 ASC");
-	}else{
-		?> <script>alert('Data Tidak Ditemukan');window.location='../admin/promo.php'</script> <?php
 	}
+
+	if(mysqli_num_rows($result)==0){
+    ?> <script>alert('Data Tidak Ditemukan');window.location='../admin/promo.php'</script> <?php
+  }
 ?>
 <?php require('atas.php') ?>
 <style type="text/css" media="print"> @page { size: portrait; } </style>
@@ -29,7 +31,7 @@ require "../kon.php";
     <thead class="text-center">
       <tr>
         <th>No</th>
-        <th>Waktu</th>
+        <th>Waktu (WITA)</th>
         <th>Jenis Laundry</th>
         <th>Sub Jenis</th>
         <th>Event</th>
@@ -43,12 +45,12 @@ while( $data = mysqli_fetch_array($result) ) :
  ?> 
 <tr class="text-center">
 		<td><?= $i++; ?></td>
-		<td><?= $data['waktu1'].' <br>'.$data['waktu2'] ?></td>
+		<td><?= date('d/m/Y,H:i',strtotime($data['waktu1'])).' <br>'.date('d/m/Y,H:i',strtotime($data['waktu2'])) ?></td>
     <td><?= $data['jenis'] ?></td>
     <td><?= $data['subjenis'] ?></td>
     <td><?= $data['event'] ?></td>
-    <td><?= $data['hargaawal'] ?></td>
-    <td><?= $data['hargapromo'] ?></td>
+    <td>Rp. <?= number_format($data['hargaawal'],0,'.','.') ?></td> 
+    <td>Rp. <?= number_format($data['hargapromo'],0,'.','.') ?></td>
 </tr>
 <?php endwhile; ?>
   </table>

@@ -100,11 +100,17 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Antar Jemput</label>
-                                <select name="antarjemput" class="form-control" required>
+                                <label>Layanan</label>
+                                <select name="layanan" id="layanan" class="form-control">
                                     <option value="Tidak">Tidak</option>
-                                    <option value="Ya">Ya</option>
+                                    <option value="Antar Jemput">Antar Jemput</option>
+                                    <option value="Jemput">Jemput</option>
+                                    <option value="Antar">Antar</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Biaya Ongkir</label>
+                                <input type="number" name="ongkir" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
@@ -131,9 +137,9 @@
 <?php
     date_default_timezone_set('Asia/Kuala_Lumpur');
     if (isset($_POST['tambah'])) {
-        $idjenis = $_REQUEST['idjenis'];
-        $jumlahku  = $_REQUEST['jumlahku'];
-        $harga   = $_REQUEST['harga'];
+        $idjenis  = $_REQUEST['idjenis'];
+        $jumlahku = $_REQUEST['jumlahku'];
+        $harga    = $_REQUEST['harga'];
         if (isset($_SESSION['keranjang'][$idjenis])) {
           $_SESSION['keranjang'][$idjenis] += $jumlahku;
         }else{
@@ -146,22 +152,25 @@
     }
 
     if (isset($_POST['simpan'])) {
-        $id   = $_REQUEST['id'];
-        $tgl   = date('Y-m-d\TH:i');
-        $antarjemput = $_REQUEST['antarjemput'];
-        $catatan = $_REQUEST['catatan'];
+        $id          = $_REQUEST['id'];
+        $tgl         = date('Y-m-d\TH:i');
+        $layanan     = $_REQUEST['layanan'];
+        $catatan     = $_REQUEST['catatan'];
+        $ongkir      = $_REQUEST['ongkir'];
         $notransaksi = date('Ymds');
+        $seluruh     = $totalbelanja + $ongkir;
 
-        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,antarjemput,catatan,dicuci) VALUES ('$notransaksi','$id','$totalbelanja','$tgl','$antarjemput','$catatan','Belum')");
+        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,status,ongkir) VALUES ('$notransaksi','$id','$seluruh','$tgl','$layanan','$catatan','Proses','$ongkir')");
 
         foreach ($_SESSION['keranjang'] as $idjenis => $jumlah) {
-            $query = mysqli_query($kon, "SELECT * FROM jenis WHERE idjenis = '$idjenis'");
-            $ambil = mysqli_fetch_array($query);
-            $jenis = $ambil['jenis'];
-            $hargany = $ambil['harga'];
+            $query      = mysqli_query($kon, "SELECT * FROM jenis WHERE idjenis = '$idjenis'");
+            $ambil      = mysqli_fetch_array($query);
+            $jenis      = $ambil['jenis'];
+            $hargany    = $ambil['harga'];
             $subjenisny = $ambil['subjenis'];
+            $kimiwiw    = $jumlah * $hargany;
 
-            $detail = mysqli_query($kon,"INSERT INTO detail (notransaksi, jenisny, subjenisny, jumlah, hargany, subharga) VALUES ('$notransaksi','$jenis','$subjenisny','$jumlah','$hargany','$subharga')");
+            $detail = mysqli_query($kon,"INSERT INTO detail (notransaksi, jenisny, subjenisny, jumlah, hargany, subharga) VALUES ('$notransaksi','$jenis','$subjenisny','$jumlah','$hargany','$kimiwiw')");
         }
 
         if($hasil){

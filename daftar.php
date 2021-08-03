@@ -1,6 +1,6 @@
 <?php require('header.php') ?>
 	</div>
-  <div class="collection_text">PROMO</div>
+  <div class="collection_text">DAFTAR LAUNDRY</div>
     <div class="layout_padding collection_section">
     	<div class="container">
            <div class="panel panel-default">
@@ -10,30 +10,29 @@
                             <thead class="success table-dark">
                                 <tr>
                                     <th>No</th>
-                                    <th>Waktu (WITA)</th>
-                                    <th>Jenis Laundry</th>
-                                    <th>Sub Jenis</th>
-                                    <th>Event</th>
-                                    <th>Harga Awal</th>
-                                    <th>Harga Promo</th>
+                                        <th>Jenis</th>
+                                        <th>Sub Jenis</th>
+                                        <th>Harga (Rp)</th>
+                                        <th>Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM promo INNER JOIN jenis ON promo.idjenis = jenis.idjenis ORDER BY waktu1 ASC");
+                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM jenis ORDER BY jenis ASC");
                                         while($data = mysqli_fetch_array($query)){ ?>
-                                            <tr class="odd gradeX" style="color:black">
+                                            <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= date('d/m/Y,H:i',strtotime($data['waktu1'])).' <br>'.date('d/m/Y,H:i',strtotime($data['waktu2'])) ?></td>
                                                     <td><?= $data['jenis'] ?></td>
                                                     <td><?= $data['subjenis'] ?></td>
-                                                    <td><?= $data['event'] ?></td>
-                                                    <td>Rp. <?= number_format($data['hargaawal'],0,'.','.') ?></td>
-                                                    <td>Rp. <?= number_format($data['hargapromo'],0,'.','.') ?></td>
+                                                    <td><?= number_format($data['harga'],0,'.','.') ?></td>
+                                                    <td><?= $data['ket'] ?></td>
                                                 </tr>
                                         <?php } ?>
                                           
                                 </tbody>
                         </table>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                                 
                 </div>

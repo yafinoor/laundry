@@ -6,9 +6,11 @@ require "../kon.php";
 		$result = mysqli_query($kon, "SELECT * FROM inventorimasuk INNER JOIN inventori ON inventorimasuk.idinventori = inventori.idinventori WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
 	}else if($tahun AND empty($bulan)){
 		$result = mysqli_query($kon, "SELECT * FROM inventorimasuk INNER JOIN inventori ON inventorimasuk.idinventori = inventori.idinventori WHERE YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
-	}else{
-		?> <script>alert('Data Tidak Ditemukan');window.location='../admin/masuk.php'</script> <?php
 	}
+
+	if(mysqli_num_rows($result)==0){
+    ?> <script>alert('Data Tidak Ditemukan');window.location='../admin/masuk.php'</script> <?php
+  }
 ?>
 <?php require('atas.php') ?>
 <style type="text/css" media="print"> @page { size: portrait; } </style>
@@ -44,13 +46,13 @@ while( $data = mysqli_fetch_array($result) ) :
  ?> 
 <tr class="text-center">
 		<td><?= $i++; ?></td>
-		<td><?= $data['tgl'] ?></td>
+		<td><?= date('d/m/Y',strtotime($data['tgl'])); ?></td>
 		<td><?= $data['namainven'] ?></td>
 		<td><?= $data['merk'] ?></td>
 		<td><?= $data['ket'] ?></td>
 		<td><?= $data['jumlah'] ?></td>
-		<td><?= $data['harga'] ?></td>
-		<td><?= $data['total'] ?></td>
+		<td><?= number_format($data['harga'],0,'.','.') ?></td> 
+		<td><?= number_format($data['total'],0,'.','.') ?></td>
 </tr>
 <?php endwhile; ?>
   </table>

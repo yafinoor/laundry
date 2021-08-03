@@ -34,5 +34,9 @@
 	}else if (isset($_GET['notransaksi'])) {
 		mysqli_query($kon, "DELETE FROM transaksi WHERE notransaksi='$_REQUEST[notransaksi]'");
 		?> <script>window.location='transaksi.php';</script> <?php
+	// repair
+	}else if (isset($_GET['idinventorirepair'])) {
+		mysqli_query($kon, "DELETE FROM inventorirepair WHERE idinventorirepair='$_REQUEST[idinventorirepair]'");
+		?> <script>window.location='repair.php';</script> <?php
 	}
 ?>

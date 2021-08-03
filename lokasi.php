@@ -6,8 +6,7 @@
     		<div class="racing_shoes">
     			<div class="row">
     				<div class="col-md-7">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.6302389249267!2d114.85208431380981!3d-3.4397967974963066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de68102a8a84d71%3A0x881046928d800220!2sJl.%20Budi%20Waluyo%2C%20Komet%2C%20Kec.%20Banjarbaru%20Utara%2C%20Kota%20Banjar%20Baru%2C%20Kalimantan%20Selatan!5e0!3m2!1sid!2sid!4v1627408559501!5m2!1sid!2sid" width="600" height="450" style="border:0; margin-left: 30px" allowfullscreen="" loading="lazy"></iframe>
-                        <a style="margin-left: 30px" href="https://www.vecteezy.com/free-vector/web">Sumber Foto dari Vecteezy</a>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.6302389249267!2d114.85208431380981!3d-3.4397967974963066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de68102a8a84d71%3A0x881046928d800220!2sJl.%20Budi%20Waluyo%2C%20Komet%2C%20Kec.%20Banjarbaru%20Utara%2C%20Kota%20Banjar%20Baru%2C%20Kalimantan%20Selatan!5e0!3m2!1sid!2sid!4v1627408559501!5m2!1sid!2sid" width="600" height="510" style="border:0; margin-left: 30px" allowfullscreen="" loading="lazy"></iframe>
     				</div>
     				<div class="col-md-5">
     					<div class="sale_text"><strong>Jl. Budi Waluyo, <br><span style="color: #0a0506;">Komet, Kec. Banjarbaru Utara, </span> <br>Kota Banjar Baru, </strong><span style="color:black">Kalimantan Selatan</span></div>

@@ -1,4 +1,4 @@
-<?php require('kon.php');session_start(); error_reporting(0);
+<?php require('kon.php');session_start(); require('delete.php'); error_reporting(0);
     $level  = $_SESSION['level'];
     $username   = $_SESSION['username'];
     $query      = mysqli_query($kon,"SELECT * FROM user WHERE level='$level' AND username = '$username'");
@@ -43,6 +43,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                            <a class="nav-item nav-link" href="index.php">Home</a>
+                           <a class="nav-item nav-link" href="daftar.php">Daftar Laundry</a>
                            <a class="nav-item nav-link" href="promo.php">Promo</a>
                            <a class="nav-item nav-link" href="lokasi.php">Lokasi</a>
                            <?php if($memori['level']=='Pelanggan'){ ?>

@@ -6,9 +6,11 @@ require "../kon.php";
 		$result = mysqli_query($kon, "SELECT * FROM gaji INNER JOIN user ON gaji.id = user.id WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
 	}else if($tahun AND empty($bulan)){
 		$result = mysqli_query($kon, "SELECT * FROM gaji INNER JOIN user ON gaji.id = user.id WHERE YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
-	}else{
-		?> <script>alert('Data Tidak Ditemukan');window.location='../admin/gaji.php'</script> <?php
 	}
+
+	if(mysqli_num_rows($query)==0){
+    ?> <script>alert('Data Tidak Ditemukan');window.location='../admin/gaji.php'</script> <?php
+  }
 ?>
 <?php require('atas.php') ?>
 <style type="text/css" media="print"> @page { size: portrait; } </style>
@@ -40,9 +42,9 @@ while( $data = mysqli_fetch_array($result) ) :
  ?> 
 <tr class="text-center">
   	<td><?= $i++; ?></td>
-  	<td><?= $data['tgl'] ?></td>
+  	<td><?= tgl_indo($data['tgl']) ?></td>
     <td><?= $data['nama'] ?></td>
-    <td><?= $data['total'] ?></td>
+    <td><?= number_format($data['total'],0,'.','.') ?></td>
 </tr>
 <?php endwhile; ?>
   </table>

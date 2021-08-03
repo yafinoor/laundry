@@ -66,7 +66,7 @@
                                 <thead class="success">
                                     <tr>
                                         <th>No</th>
-                                        <th>Waktu</th>
+                                        <th>Waktu (WITA)</th>
                                         <th>Jenis Laundry</th>
                                         <th>Sub Jenis</th>
                                         <th>Event</th>
@@ -80,12 +80,12 @@
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['waktu1'].' <br>'.$data['waktu2'] ?></td>
+                                                    <td><?= date('d/m/Y,H:i',strtotime($data['waktu1'])).' <br>'.date('d/m/Y,H:i',strtotime($data['waktu2'])) ?></td>
                                                     <td><?= $data['jenis'] ?></td>
                                                     <td><?= $data['subjenis'] ?></td>
                                                     <td><?= $data['event'] ?></td>
-                                                    <td><?= $data['hargaawal'] ?></td>
-                                                    <td><?= $data['hargapromo'] ?></td>
+                                                    <td>Rp. <?= number_format($data['hargaawal'],0,'.','.') ?></td>
+                                                    <td>Rp. <?= number_format($data['hargapromo'],0,'.','.') ?></td>
                                                     <td>
                                                         <a href="promo_edit.php?idpromo=<?php echo $data['idpromo']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                                                         <a href="delete.php?idpromo=<?php echo $data['idpromo'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>

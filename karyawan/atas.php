@@ -1,4 +1,4 @@
-<?php require('../kon.php');session_start(); 
+<?php require('../kon.php'); require('../tgl_indo.php'); session_start(); 
     $level  = $_SESSION['level'];
     $username   = $_SESSION['username'];
     $query      = mysqli_query($kon,"SELECT * FROM user WHERE level='$level' AND username = '$username'");
@@ -68,9 +68,6 @@
                 <a href="user.php"><i class="fa fa-user-secret fa-fw"></i> Pelanggan</a>
             </li>
             <li>
-                <a href="jenis.php"><i class="fa fa-circle-o-notch fa-fw"></i> Jenis Laundry</a>
-            </li>
-            <li>
                 <a href="#"><i class="fa fa-tasks fa-fw"></i> Data Inventori<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -86,9 +83,6 @@
             </li>
             <li>
                 <a href="transaksi.php"><i class="fa fa-get-pocket fa-fw"></i> Transaksi</a>
-            </li>
-            <li>
-                <a href="promo.php"><i class="fa fa-heart fa-fw"></i> Promo</a>
             </li>
         </ul>
     </div>

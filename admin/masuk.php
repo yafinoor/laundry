@@ -81,13 +81,13 @@
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['tgl'] ?></td>
+                                                    <td><?= date('d/m/Y',strtotime($data['tgl'])); ?></td>
                                                     <td><?= $data['namainven'] ?></td>
                                                     <td><?= $data['merk'] ?></td>
                                                     <td><?= $data['ket'] ?></td>
                                                     <td><?= $data['jumlah'] ?></td>
-                                                    <td><?= $data['harga'] ?></td>
-                                                    <td><?= $data['total'] ?></td>
+                                                    <td><?= number_format($data['harga'],0,'.','.') ?></td>
+                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
                                                     <td>
                                                         <a href="masuk_edit.php?idinventorimasuk=<?php echo $data['idinventorimasuk']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                                                         <a href="delete.php?idinventorimasuk=<?php echo $data['idinventorimasuk'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>

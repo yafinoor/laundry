@@ -1,34 +1,30 @@
-<?php require('header.php') ?>
-	</div>
-  <div class="collection_text">PROMO</div>
+<?php require('header.php'); $notransaksi = $_GET['notransaksi'];
+  $data = mysqli_fetch_array($query); ?>
+    </div>
+  <div class="collection_text">PROSES LAUNDRY</div>
     <div class="layout_padding collection_section">
-    	<div class="container">
+        <div class="container">
            <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="table-responsive">
+                        <h1>No. Transaksi : <?= $notransaksi ?></h1>
                         <table class="table table-bordered table-hover " id="dataTables-example">
                             <thead class="success table-dark">
                                 <tr>
                                     <th>No</th>
                                     <th>Waktu (WITA)</th>
-                                    <th>Jenis Laundry</th>
-                                    <th>Sub Jenis</th>
-                                    <th>Event</th>
-                                    <th>Harga Awal</th>
-                                    <th>Harga Promo</th>
+                                    <th>Keterangan</th>
+                                    <th>Nama Karyawan</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM promo INNER JOIN jenis ON promo.idjenis = jenis.idjenis ORDER BY waktu1 ASC");
+                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$notransaksi' ORDER BY waktu DESC");
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX" style="color:black">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= date('d/m/Y,H:i',strtotime($data['waktu1'])).' <br>'.date('d/m/Y,H:i',strtotime($data['waktu2'])) ?></td>
-                                                    <td><?= $data['jenis'] ?></td>
-                                                    <td><?= $data['subjenis'] ?></td>
-                                                    <td><?= $data['event'] ?></td>
-                                                    <td>Rp. <?= number_format($data['hargaawal'],0,'.','.') ?></td>
-                                                    <td>Rp. <?= number_format($data['hargapromo'],0,'.','.') ?></td>
+                                                    <td><?= date('d/m/Y,H:i',strtotime($data['waktu'])) ?></td>
+                                                <td><?= $data['ket'] ?></td>
+                                                <td><?= $data['karyawan'] ?></td>
                                                 </tr>
                                         <?php } ?>
                                           
@@ -39,7 +35,7 @@
                 </div>
                 <!-- /.panel-body -->
             </div>
-    	</div>
+        </div>
     </div>
 
       <!-- Javascript files-->

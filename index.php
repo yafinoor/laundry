@@ -1,4 +1,4 @@
-<?php require('header.php') ?>
+<?php require('header.php');?>
 	</div>
 <style>
     body{
@@ -12,7 +12,6 @@
   <div class="collection_text">Selamat Datang <?= $memori['nama'] ?></div>
     <div class="layout_padding collection_section">
     	<div class="container">
-    	   <h1 class="new_text"><strong>Transaksi Anda</strong></h1>
            <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -21,31 +20,41 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Waktu (WITA)</th>
-                                    <th>No.Transaksi</th>
-                                    <th>Nama Pelanggan</th>
-                                    <th>Total (Rp)</th>
-                                    <th>Dicuci</th>
-                                    <th>Antar Jemput</th>
+                                    <th>No.Transaksi <br>& Nama Pelanggan</th>
+                                    <th>Sub Total</th>
+                                    <th>Ongkir</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Layanan</th>
                                     <th>Catatan</th>
                                 </tr>
                             </thead>
                             <tbody class="table-light">
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' ORDER BY tgl DESC");
+                                    <?php $no=1; 
+                                    $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' ORDER BY tgl DESC");
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX" style="color:black">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['tgl'] ?></td>
+                                                    <td><?= date('d/m/Y,H:i',strtotime($data['tgl'])) ?></td>
                                                     <td>
                                                         <a href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
+                                                        <?= $data['nama'] ?>
                                                     </td>
-                                                    <td><?= $data['nama'] ?></td>
-                                                    <td><?= $data['total'] ?></td>
-                                                    <td><?= $data['dicuci'] ?></td>
-                                                    <td><?= $data['antarjemput'] ?></td>
+                                                    <td><?= number_format($data['total']-$data['ongkir'],0,'.','.') ?></td>
+                                                    <td><?= number_format($data['ongkir'],0,'.','.') ?></td>
+                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
+                                                    <td><a style="color: blue" target="_blank" href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>"><?= $data['status'] ?></a></td>
+                                                    <td><?= $data['layanan'] ?></td>
                                                     <td><?= $data['catatan'] ?></td>
                                                 </tr>
-                                        <?php } ?>
-                                          
+                                        <?php } ?> 
+                                    <?php if(mysqli_num_rows($query)<=0){
+                                        ?>
+                                            <tr class="odd gradeX" style="color:black">
+                                                <td colspan="9"><h1 class="text-center">Tidak Ada Transaksi</h1></td>
+                                            </tr>
+                                        <?php
+                                    } ?>
                                 </tbody>
                         </table>
                     </div>

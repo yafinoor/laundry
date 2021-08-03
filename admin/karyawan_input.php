@@ -25,7 +25,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Telp</label>
-                                <input class="form-control" name="telp" placeholder="Contoh : 628975548712" required>
+                                <input class="form-control" name="telp" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tugas</label>
+                                <input class="form-control" name="tugas" required>
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
@@ -55,18 +59,19 @@
 <?php require('bawah.php') ?>
 <?php
   if (isset($_POST['simpan'])) {
-    $user       = $_REQUEST['user'];
-    $nama       = $_REQUEST['nama'];
-    $ttl        = $_REQUEST['ttl'];
-    $telp       = $_REQUEST['telp'];
-    $alamat     = $_REQUEST['alamat'];
-    $jk         = $_REQUEST['jk'];
+    $user   = $_REQUEST['user'];
+    $nama   = $_REQUEST['nama'];
+    $ttl    = $_REQUEST['ttl'];
+    $telp   = $_REQUEST['telp'];
+    $alamat = $_REQUEST['alamat'];
+    $jk     = $_REQUEST['jk'];
+    $tugas  = $_REQUEST['tugas'];
 
-    $tambah = mysqli_query($kon,"INSERT INTO user(username,password,nama,ttl,telp,alamat,jk,level) VALUES ('$user','$user','$nama','$ttl','$telp','$alamat','$jk','Pelanggan')");
+    $tambah = mysqli_query($kon,"INSERT INTO user(username,password,nama,ttl,telp,alamat,jk,level,tugas) VALUES ('$user','$user','$nama','$ttl','$telp','$alamat','$jk','Karyawan','$tugas')");
     if($tambah){
-      ?> <script>alert("Berhasil Disimpan");window.location='user.php';</script> <?php
+      ?> <script>alert("Berhasil Disimpan");window.location='karyawan.php';</script> <?php
     }else{
-      ?> <script>alert("Gagal Disimpan");window.location='user_input.php';</script> <?php
+      ?> <script>alert("Gagal Disimpan");window.location='karyawan_input.php';</script> <?php
     }
   }
 ?>

@@ -4,6 +4,7 @@
     $gaji= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM gaji"));
     $transaksi= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM transaksi"));
     $promo= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM promo"));
+    $repair= mysqli_num_rows(mysqli_query($kon, "SELECT * FROM inventorirepair"));
 ?>
 
 <div id="page-wrapper">
@@ -75,13 +76,14 @@
             <div class="col-lg-3 col-md-6">
                 <div class="hero-widget well well-sm">
                     <div class="icon">
-                        <i class="fa fa-archive"></i>
+                        <i class="fa fa-tasks"></i>
                     </div>
                     <div class="text">
-                        <label class="text-muted">Data Pendapatan</label>
+                        <span class="value"><?= $repair ?></span>
+                        <label class="text-muted">Data Perbaikan</label>
                     </div>
                     <div class="options">
-                        <a href="pendapatan.php" class="btn btn-primary btn-lg">Lihat Selengkapnya</a>
+                        <a href="repair.php" class="btn btn-primary btn-lg">Lihat Selengkapnya</a>
                     </div>
                 </div>
             </div>

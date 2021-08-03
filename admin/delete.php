@@ -2,8 +2,8 @@
 	error_reporting(0);
 	require_once("../kon.php");
 	?> <script>alert('Berhasil Dihapus');</script> <?php
-	// user
-	if (isset($_GET['id'])) {
+	// pelanggan
+	if (isset($_GET['id']) AND $_GET['level'] == 'pelanggan') {
 		mysqli_query($kon, "DELETE FROM user WHERE id='$_REQUEST[id]'");
 		?> <script>window.location='user.php';</script> <?php
 	// inventori
@@ -34,5 +34,13 @@
 	}else if (isset($_GET['notransaksi'])) {
 		mysqli_query($kon, "DELETE FROM transaksi WHERE notransaksi='$_REQUEST[notransaksi]'");
 		?> <script>window.location='transaksi.php';</script> <?php
+	// repair
+	}else if (isset($_GET['idinventorirepair'])) {
+		mysqli_query($kon, "DELETE FROM inventorirepair WHERE idinventorirepair='$_REQUEST[idinventorirepair]'");
+		?> <script>window.location='repair.php';</script> <?php
+	// karyawan
+	}else if (isset($_GET['id']) AND $_GET['level'] == 'karyawan') {
+		mysqli_query($kon, "DELETE FROM user WHERE id='$_REQUEST[id]'");
+		?> <script>window.location='karyawan.php';</script> <?php
 	}
 ?>

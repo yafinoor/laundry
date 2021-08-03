@@ -14,7 +14,7 @@
                                   <input type="text" class="email-bt" placeholder="username" name="username">
                                 </div>
                                 <div class="form-group">
-                                  <input type="password" class="email-bt" placeholder="password" name="password">
+                                  <input type="password" class="email-bt" placeholder="Password/Telp" name="password">
                                 </div>
                                  
                            </div> 

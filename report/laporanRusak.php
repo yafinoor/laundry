@@ -6,9 +6,11 @@ require "../kon.php";
 		$result = mysqli_query($kon, "SELECT * FROM inventorirusak INNER JOIN inventori ON inventorirusak.idinventori = inventori.idinventori INNER JOIN user ON inventorirusak.id = user.id WHERE MONTH(tglrusak) = '$bulan' AND YEAR(tglrusak) = '$tahun' ORDER BY tglrusak ASC");
 	}else if($tahun AND empty($bulan)){
 		$result = mysqli_query($kon, "SELECT * FROM inventorirusak INNER JOIN inventori ON inventorirusak.idinventori = inventori.idinventori INNER JOIN user ON inventorirusak.id = user.id WHERE YEAR(tglrusak) = '$tahun' ORDER BY tglrusak ASC");
-	}else{
-		?> <script>alert('Data Tidak Ditemukan');window.location='../admin/rusak.php'</script> <?php
 	}
+
+	if(mysqli_num_rows($result)==0){
+    ?> <script>alert('Data Tidak Ditemukan');window.location='../admin/rusak.php'</script> <?php
+  }
 ?>
 <?php require('atas.php') ?>
 <style type="text/css" media="print"> @page { size: portrait; } </style>
@@ -30,8 +32,7 @@ require "../kon.php";
       <tr>
         <th>No</th>
         <th>Tanggal</th>
-        <th>Nama</th>
-        <th>Merk</th>
+        <th>Nama (Merk)</th>
         <th>Pelapor</th>
         <th>Keterangan</th>
         <th>Jumlah</th>
@@ -43,9 +44,8 @@ while( $data = mysqli_fetch_array($result) ) :
  ?> 
 <tr class="text-center">
 		<td><?= $i++; ?></td>
-		<td><?= $data['tglrusak'] ?></td>
-    <td><?= $data['namainven'] ?></td>
-    <td><?= $data['merk'] ?></td>
+		<td><?= date('d/m/Y',strtotime($data['tglrusak'])); ?></td>
+    <td><?= $data['namainven'].' ('.$data['merk'].')'; ?></td>
     <td><?= $data['nama'] ?></td>
     <td><?= $data['ket'] ?></td>
     <td><?= $data['jumlah'] ?></td>

@@ -7,12 +7,12 @@
                 <h4 class="modal-title" id="myModalLabel">Cetak</h4>
             </div>
             <div class="modal-body">
-                <form action="../report/laporanGaji.php" target="_blank" method="post">
+                <form action="../report/laporanRepair.php" target="_blank" method="post">
                 <label>Bulan</label>
                 <select name="bulan" class="form-control">
                   <option value="">Pilih</option>
                   <?php
-                    $ahay = mysqli_query($kon, "SELECT DISTINCT MONTH(tgl) as bulan FROM gaji ORDER BY bulan ASC");
+                    $ahay = mysqli_query($kon, "SELECT DISTINCT MONTH(tgl) as bulan FROM inventorirepair ORDER BY bulan ASC");
                     while($baris = mysqli_fetch_array($ahay)) {
                     $bulan = $baris['bulan']; 
                       if($bulan == 1){ $namabulan = "Januari";
@@ -34,7 +34,7 @@
                 <label>Tahun</label>
                 <select name="tahun" class="form-control" required>
                   <?php
-                    $ahay = mysqli_query($kon, "SELECT DISTINCT YEAR(tgl) as tahun FROM gaji ORDER BY tahun ASC");
+                    $ahay = mysqli_query($kon, "SELECT DISTINCT YEAR(tgl) as tahun FROM inventorirepair ORDER BY tahun ASC");
                     while($baris = mysqli_fetch_array($ahay)) {
                         ?><option value="<?= $baris['tahun'] ?>"><?= $baris['tahun']; ?></option> 
                     <?php } ?>
@@ -49,13 +49,12 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><button class="btn btn-success btn-lg"><a href="gaji_input.php" style="color: white; text-decoration: none">+Data Gaji Karyawan</a></button>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> Cetak </button></h1>
+                <h1 class="page-header"><button class="btn btn-success btn-lg"><a href="repair_input.php" style="color: white; text-decoration: none">+Data Inventori Perbaikan</a></button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> Cetak </button></h1>
             </div>
         </div>
         <div class="row">
@@ -67,23 +66,27 @@
                                 <thead class="success">
                                     <tr>
                                         <th>No</th>
-                                        <th>Tanggal</th>
-                                        <th>Nama Karyawan</th>
-                                        <th>Total (Rp)</th>
+                                        <th>Tanggal Diperbaiki</th>
+                                        <th>Tanggal Rusak</th>
+                                        <th>Nama (Merk)</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
                                         <th><i class="fa fa-toggle-on"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM gaji INNER JOIN user ON gaji.id = user.id ORDER BY tgl DESC");
+                                    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM inventorirepair INNER JOIN inventorirusak ON inventorirepair.idinventorirusak = inventorirusak.idinventorirusak INNER JOIN inventori ON inventorirusak.idinventori = inventori.idinventori ORDER BY tgl ASC");
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= tgl_indo($data['tgl']) ?></td>
-                                                    <td><?= $data['nama'] ?></td>
-                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
+                                                    <td><?= date('d/m/Y',strtotime($data['tgl'])); ?></td>
+                                                    <td><?= date('d/m/Y',strtotime($data['tglrusak'])); ?></td>
+                                                    <td><?= $data['namainven'].' ('.$data['merk'].')'; ?></td>
+                                                    <td><?= $data['catatan'] ?></td>
+                                                    <td><?= $data['repair'] ?></td>
                                                     <td>
-                                                        <a href="gaji_edit.php?idgaji=<?php echo $data['idgaji']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-                                                        <a href="delete.php?idgaji=<?php echo $data['idgaji'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                        <a href="repair_edit.php?idinventorirepair=<?php echo $data['idinventorirepair']; ?>" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                                        <a href="delete.php?idinventorirepair=<?php echo $data['idinventorirepair'] ?>" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                         <?php } ?>

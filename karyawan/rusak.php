@@ -16,8 +16,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal</th>
-                                        <th>Nama</th>
-                                        <th>Merk</th>
+                                        <th>Nama (Merk)</th>
                                         <th>Pelapor</th>
                                         <th>Keterangan</th>
                                         <th>Jumlah</th>
@@ -29,9 +28,8 @@
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX">
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data['tglrusak'] ?></td>
-                                                    <td><?= $data['namainven'] ?></td>
-                                                    <td><?= $data['merk'] ?></td>
+                                                    <td><?= date('d/m/Y',strtotime($data['tglrusak'])); ?></td>
+                                                    <td><?= $data['namainven'].' ('.$data['merk'].')'; ?></td>
                                                     <td><?= $data['nama'] ?></td>
                                                     <td><?= $data['ket'] ?></td>
                                                     <td><?= $data['jumlah'] ?></td>
