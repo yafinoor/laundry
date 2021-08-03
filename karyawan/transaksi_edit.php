@@ -23,8 +23,6 @@
                                 <select class="form-control" name="layanan" required>
                                     <option value="<?= $data['layanan'] ?>"><?= $data['layanan'] ?></option>
                                     <option value="Tidak">Tidak</option>
-                                    <option value="Antar Jemput">Antar Jemput</option>
-                                    <option value="Jemput">Jemput</option>
                                     <option value="Antar">Antar</option>
                                 </select>
                             </div>
