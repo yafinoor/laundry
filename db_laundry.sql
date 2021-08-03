@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2021 at 08:23 PM
+-- Generation Time: Aug 03, 2021 at 03:26 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -63,13 +63,9 @@ CREATE TABLE `detail` (
 --
 
 INSERT INTO `detail` (`iddetail`, `notransaksi`, `jenisny`, `subjenisny`, `jumlah`, `hargany`, `subharga`) VALUES
-(6, '2021072609', 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 2, 10000, 15000),
-(7, '2021072609', 'Cuci Kiloan', 'Cuci Basah', 3, 5000, 15000),
-(8, '2021072657', 'Cuci Satuan', 'Cuci Kering Setrika', 4, 3500, 50000),
-(9, '2021072657', 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 5, 10000, 50000),
-(10, '2021072755', 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 3, 10000, 30000),
-(11, '2021072727', 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 2, 10000, 17500),
-(12, '2021072727', 'Cuci Satuan', 'Cuci Kering Setrika', 5, 3500, 17500);
+(27, '2021080219', 'Cuci Kiloan', 'Cuci Basah', 3, 5000, 15000),
+(28, '2021080247', 'Cuci Satuan', 'Bad Cover Besar', 3, 18000, 54000),
+(29, '2021080247', 'Cuci Satuan', 'Cuci Saja', 4, 2000, 8000);
 
 -- --------------------------------------------------------
 
@@ -109,8 +105,8 @@ CREATE TABLE `inventori` (
 --
 
 INSERT INTO `inventori` (`idinventori`, `namainven`, `merk`, `stok`) VALUES
-(2, 'Mesin Cuci', 'RCTI', 2),
-(4, 'Setrika', 'Sanyo', 3);
+(2, 'Mesin Cuci', 'RCTI', 4),
+(4, 'Setrika', 'Sanyo', 1);
 
 -- --------------------------------------------------------
 
@@ -164,6 +160,27 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inventorirepair`
+--
+
+CREATE TABLE `inventorirepair` (
+  `idinventorirepair` int(5) NOT NULL,
+  `idinventorirusak` int(5) NOT NULL,
+  `tgl` date NOT NULL,
+  `catatan` text NOT NULL,
+  `repair` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inventorirepair`
+--
+
+INSERT INTO `inventorirepair` (`idinventorirepair`, `idinventorirusak`, `tgl`, `catatan`, `repair`) VALUES
+(1, 8, '2021-08-03', 'Sudah berfungsi pemanasnya', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventorirusak`
 --
 
@@ -181,8 +198,7 @@ CREATE TABLE `inventorirusak` (
 --
 
 INSERT INTO `inventorirusak` (`idinventorirusak`, `idinventori`, `id`, `tglrusak`, `ket`, `jumlah`) VALUES
-(5, 2, 1, '2021-07-23', '-', 1),
-(6, 2, 6, '2021-07-27', '-', 1);
+(8, 4, 1, '2021-08-01', 'Sudah Tidak Berfungsi dengan Baik.', 2);
 
 --
 -- Triggers `inventorirusak`
@@ -231,7 +247,11 @@ CREATE TABLE `jenis` (
 INSERT INTO `jenis` (`idjenis`, `jenis`, `subjenis`, `harga`, `ket`) VALUES
 (2, 'Cuci Satuan', 'Cuci Kering Setrika', 3500, '-'),
 (3, 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 10000, '-'),
-(4, 'Cuci Kiloan', 'Cuci Basah', 5000, '-');
+(4, 'Cuci Kiloan', 'Cuci Basah', 5000, '-'),
+(5, 'Cuci Satuan', 'Selimut Tipis', 12000, '-'),
+(6, 'Cuci Satuan', 'Bad Cover Besar', 18000, '-'),
+(7, 'Cuci Satuan', 'Cuci Saja', 2000, '-'),
+(8, 'Cuci Kiloan', 'Cuci Saja', 3500, '-');
 
 -- --------------------------------------------------------
 
@@ -254,7 +274,31 @@ CREATE TABLE `promo` (
 --
 
 INSERT INTO `promo` (`idpromo`, `waktu1`, `waktu2`, `idjenis`, `hargaawal`, `hargapromo`, `event`) VALUES
-(1, '2021-07-27 19:09:00', '2021-07-29 19:09:00', 4, 5000, 4500, 'Cuci Gudang');
+(1, '2021-07-27 19:09:00', '2021-08-01 19:09:00', 4, 5000, 4500, 'Cuci Gudang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `proses`
+--
+
+CREATE TABLE `proses` (
+  `idproses` int(5) NOT NULL,
+  `notransaksi` varchar(15) NOT NULL,
+  `waktu` datetime NOT NULL,
+  `ket` text NOT NULL,
+  `karyawan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `proses`
+--
+
+INSERT INTO `proses` (`idproses`, `notransaksi`, `waktu`, `ket`, `karyawan`) VALUES
+(8, '2021080219', '2021-08-03 08:15:00', 'Disetrika oleh', 'Amelia'),
+(9, '2021080247', '2021-08-03 05:51:00', 'Dicuci oleh', 'Tretan'),
+(10, '2021080247', '2021-08-03 07:52:00', 'Disetrika oleh', 'Amelia'),
+(11, '2021080247', '2021-08-03 10:52:00', 'Dipacking dan siap diantar oleh', 'Ace');
 
 -- --------------------------------------------------------
 
@@ -267,8 +311,9 @@ CREATE TABLE `transaksi` (
   `id` int(5) NOT NULL,
   `tgl` datetime NOT NULL,
   `total` float NOT NULL,
-  `dicuci` enum('Belum','Sudah') NOT NULL,
-  `antarjemput` enum('Ya','Tidak') NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `layanan` varchar(20) NOT NULL,
+  `ongkir` float NOT NULL,
   `catatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -276,11 +321,9 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`notransaksi`, `id`, `tgl`, `total`, `dicuci`, `antarjemput`, `catatan`) VALUES
-('2021072609', 3, '2021-07-26 10:37:00', 35000, 'Belum', 'Ya', '-'),
-('2021072657', 3, '2021-08-04 18:33:00', 64000, 'Belum', 'Ya', '-'),
-('2021072727', 5, '2021-07-27 06:53:00', 37500, 'Belum', 'Ya', '-'),
-('2021072755', 3, '2021-07-27 06:23:00', 30000, 'Belum', 'Ya', '-');
+INSERT INTO `transaksi` (`notransaksi`, `id`, `tgl`, `total`, `status`, `layanan`, `ongkir`, `catatan`) VALUES
+('2021080219', 3, '2021-08-02 23:07:00', 23500, 'Proses', 'Tidak', 8500, '-'),
+('2021080247', 7, '2021-08-02 23:51:00', 72000, 'Selesai', 'Antar Jemput', 10000, '-');
 
 -- --------------------------------------------------------
 
@@ -297,6 +340,7 @@ CREATE TABLE `user` (
   `ttl` varchar(80) NOT NULL,
   `telp` varchar(15) NOT NULL,
   `alamat` text NOT NULL,
+  `tugas` varchar(100) NOT NULL,
   `level` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -304,12 +348,14 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `username`, `password`, `jk`, `ttl`, `telp`, `alamat`, `level`) VALUES
-(1, 'Admin', 'admin', 'admin', '', '', '', '', 'Admin'),
-(3, 'Rendi', 'rendi', 'rendi', 'Laki-Laki', 'BJM, 31 April 1995', '089172314213', 'BJM', 'Pelanggan'),
-(4, 'Tretan', 'tretan', 'tretan', 'Laki-Laki', 'betulbanar, 15 Mei 1999', '089666714255', 'hantu mariaban', 'Karyawan'),
-(5, 'Mawar', 'mawar', 'mawar', 'Wanita', 'Banten, 17 Maret 1995', '082172614255', '-', 'Pelanggan'),
-(6, 'Portgas D. Ace', 'ace', 'ace', 'Wanita', 'Seoul, 19 Januari 1992', '08888314764', '-', 'Karyawan');
+INSERT INTO `user` (`id`, `nama`, `username`, `password`, `jk`, `ttl`, `telp`, `alamat`, `tugas`, `level`) VALUES
+(1, 'Admin', 'admin', 'admin', '', '', '', '', '', 'Admin'),
+(3, 'Rendi', 'rendi', '', 'Laki-Laki', 'BJM, 31 April 1995', '6289172314213', 'BJM', '', 'Pelanggan'),
+(4, 'Tretan', 'tretan', 'tretan', 'Laki-Laki', 'betulbanar, 15 Mei 1999', '089666714255', 'hantu mariaban', 'Cuci, Setrika', 'Karyawan'),
+(5, 'Mawar', 'mawar', '', 'Wanita', 'Banten, 17 Maret 1995', '6282172614255', '-', '', 'Pelanggan'),
+(6, 'Ace', 'ace', 'ace', 'Wanita', 'Seoul, 19 Januari 1992', '08888314764', '-', 'Packing', 'Karyawan'),
+(7, 'Sharifah', 'sharifah', 'sharifah', 'Wanita', 'Depok, 21 Januari 1996', '6288705020024', 'Martapura', '', 'Pelanggan'),
+(8, 'Amelia', 'amel', 'amel', 'Wanita', 'Banjarbaru, 12 Agustus 2000', '089896716733', 'Banjarbaru', 'Pengering', 'Karyawan');
 
 --
 -- Indexes for dumped tables
@@ -349,6 +395,13 @@ ALTER TABLE `inventorimasuk`
   ADD KEY `idinventori` (`idinventori`);
 
 --
+-- Indexes for table `inventorirepair`
+--
+ALTER TABLE `inventorirepair`
+  ADD PRIMARY KEY (`idinventorirepair`),
+  ADD KEY `idinventorirusak` (`idinventorirusak`);
+
+--
 -- Indexes for table `inventorirusak`
 --
 ALTER TABLE `inventorirusak`
@@ -368,6 +421,13 @@ ALTER TABLE `jenis`
 ALTER TABLE `promo`
   ADD PRIMARY KEY (`idpromo`),
   ADD KEY `idjenis` (`idjenis`);
+
+--
+-- Indexes for table `proses`
+--
+ALTER TABLE `proses`
+  ADD PRIMARY KEY (`idproses`),
+  ADD KEY `notransaksi` (`notransaksi`);
 
 --
 -- Indexes for table `transaksi`
@@ -396,7 +456,7 @@ ALTER TABLE `biaya`
 -- AUTO_INCREMENT for table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `iddetail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `iddetail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `gaji`
@@ -417,16 +477,22 @@ ALTER TABLE `inventorimasuk`
   MODIFY `idinventorimasuk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `inventorirepair`
+--
+ALTER TABLE `inventorirepair`
+  MODIFY `idinventorirepair` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `inventorirusak`
 --
 ALTER TABLE `inventorirusak`
-  MODIFY `idinventorirusak` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idinventorirusak` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `jenis`
 --
 ALTER TABLE `jenis`
-  MODIFY `idjenis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idjenis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `promo`
@@ -435,10 +501,16 @@ ALTER TABLE `promo`
   MODIFY `idpromo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `proses`
+--
+ALTER TABLE `proses`
+  MODIFY `idproses` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -461,6 +533,12 @@ ALTER TABLE `inventorimasuk`
 --
 ALTER TABLE `inventorirusak`
   ADD CONSTRAINT `inventorirusak_ibfk_1` FOREIGN KEY (`idinventori`) REFERENCES `inventori` (`idinventori`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `proses`
+--
+ALTER TABLE `proses`
+  ADD CONSTRAINT `proses_ibfk_1` FOREIGN KEY (`notransaksi`) REFERENCES `transaksi` (`notransaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
