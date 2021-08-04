@@ -8,6 +8,15 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Petunjuk
+                    </div>
+                    <div class="panel-body">
+                        <p>Pilih Jenis Laundry yang dibutuhkan, kemudian klik tombol <button class="btn btn-outline btn-primary">Tambah</button> untuk memasukkan ke keranjang.</p>
+                        <p>Jika sudah selesai, klik tombol <button class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Simpan</button> </p>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
                          <form role="form" action="" method="POST">

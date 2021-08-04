@@ -8,6 +8,10 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
+                <div class="alert alert-primary">
+                    Pilih Jenis Laundry yang dibutuhkan, kemudian klik tombol <button class="btn btn-outline btn-primary">Tambah</button> untuk memasukkan ke keranjang.
+                    <br><br>Jika sudah selesai, klik tombol <button class="btn btn-outline btn-primary">Simpan</button>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
                          <form role="form" action="" method="POST">
@@ -95,7 +99,7 @@
                                 <textarea class="email-bt" name="catatan" required style="height: 105px;"></textarea>
                             </div>
                             
-                            <button type="submit" name="simpan" class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Simpan</button>
+                            <button type="submit" name="simpan" class="btn btn-outline btn-primary">Simpan</button>
                         </form>
                     </div>
                     <!-- /.panel-body -->
