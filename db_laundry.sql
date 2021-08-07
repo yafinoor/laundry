@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2021 at 12:49 AM
+-- Generation Time: Aug 07, 2021 at 04:51 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -57,19 +57,6 @@ CREATE TABLE `detail` (
   `hargany` float NOT NULL,
   `subharga` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail`
---
-
-INSERT INTO `detail` (`iddetail`, `notransaksi`, `jenisny`, `subjenisny`, `jumlah`, `hargany`, `subharga`) VALUES
-(27, '2021080219', 'Cuci Kiloan', 'Cuci Basah', 3, 5000, 15000),
-(28, '2021080247', 'Cuci Satuan', 'Bad Cover Besar', 3, 18000, 54000),
-(29, '2021080247', 'Cuci Satuan', 'Cuci Saja', 4, 2000, 8000),
-(31, '2021080317', 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 1, 10000, 10000),
-(32, '2021080317', 'Cuci Satuan', 'Cuci Kering Setrika', 3, 3500, 10500),
-(34, '2021080353', 'Cuci Kiloan', 'Cuci Basah', 3, 5000, 15000),
-(35, '2021080353', 'Cuci Satuan', 'Cuci Kering Setrika', 1, 3500, 3500);
 
 -- --------------------------------------------------------
 
@@ -250,10 +237,10 @@ CREATE TABLE `jenis` (
 --
 
 INSERT INTO `jenis` (`idjenis`, `jenis`, `subjenis`, `harga`, `ket`) VALUES
-(2, 'Cuci Satuan', 'Cuci Kering Setrika', 3500, '-'),
-(3, 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 10000, '-'),
-(4, 'Cuci Kiloan', 'Cuci Basah', 5000, '-'),
-(5, 'Cuci Satuan', 'Selimut Tipis', 12000, '-'),
+(2, 'Cuci Satuan', 'Cuci Kering Setrika', 3500, '2 jam'),
+(3, 'Cuci Kiloan', 'Paket 1 (Cuci Kering 5kg)', 10000, '2 hari'),
+(4, 'Cuci Kiloan', 'Cuci Basah', 5000, '1 hari'),
+(5, 'Cuci Satuan', 'Selimut Tipis', 10000, '-'),
 (6, 'Cuci Satuan', 'Bad Cover Besar', 18000, '-'),
 (7, 'Cuci Satuan', 'Cuci Saja', 2000, '-'),
 (8, 'Cuci Kiloan', 'Cuci Saja', 3500, '-');
@@ -279,7 +266,7 @@ CREATE TABLE `promo` (
 --
 
 INSERT INTO `promo` (`idpromo`, `waktu1`, `waktu2`, `idjenis`, `hargaawal`, `hargapromo`, `event`) VALUES
-(1, '2021-07-27 19:09:00', '2021-08-01 19:09:00', 4, 5000, 4500, 'Cuci Gudang');
+(2, '2021-08-05 22:50:00', '2021-08-08 22:51:00', 5, 12000, 10000, 'promo 8.8');
 
 -- --------------------------------------------------------
 
@@ -295,18 +282,6 @@ CREATE TABLE `proses` (
   `karyawan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `proses`
---
-
-INSERT INTO `proses` (`idproses`, `notransaksi`, `waktu`, `ket`, `karyawan`) VALUES
-(8, '2021080219', '2021-08-03 08:15:00', 'Disetrika oleh', 'Amelia'),
-(9, '2021080247', '2021-08-03 05:51:00', 'Dicuci oleh', 'Tretan'),
-(10, '2021080247', '2021-08-03 07:52:00', 'Disetrika oleh', 'Amelia'),
-(11, '2021080247', '2021-08-03 10:52:00', 'Dipacking dan siap diantar oleh', 'Ace'),
-(12, '2021080353', '2021-08-04 07:25:00', 'Dicuci oleh', 'Tretan'),
-(13, '2021080353', '2021-08-04 08:25:00', 'Dikeringkan oleh', 'Amelia');
-
 -- --------------------------------------------------------
 
 --
@@ -318,22 +293,13 @@ CREATE TABLE `transaksi` (
   `id` int(5) NOT NULL,
   `tgl` datetime NOT NULL,
   `total` float NOT NULL,
-  `status` varchar(100) NOT NULL,
   `layanan` varchar(20) NOT NULL,
   `ongkir` float NOT NULL,
   `catatan` varchar(100) NOT NULL,
-  `konfirmasi` varchar(50) NOT NULL
+  `konfirmasi` varchar(50) NOT NULL,
+  `diterima` varchar(80) NOT NULL,
+  `bayar` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`notransaksi`, `id`, `tgl`, `total`, `status`, `layanan`, `ongkir`, `catatan`, `konfirmasi`) VALUES
-('2021080219', 3, '2021-08-02 23:07:00', 23500, 'Proses', 'Tidak', 8500, '-', 'Diterima'),
-('2021080247', 7, '2021-08-02 23:51:00', 72000, 'Selesai', 'Antar Jemput', 10000, '-', 'Diterima'),
-('2021080317', 5, '2021-08-03 18:26:00', 27500, 'Proses', 'Jemput', 7000, 'jangan dipaksa mun hujan harinya', 'Diterima'),
-('2021080353', 3, '2021-08-03 22:22:00', 23500, 'Proses', 'Antar', 5000, '-', '');
 
 -- --------------------------------------------------------
 
@@ -362,7 +328,7 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `jk`, `ttl`, `telp`, `
 (1, 'Admin', 'admin', 'admin', '', '', '', '', '', 'Admin'),
 (3, 'Rendi', 'rendi', '', 'Laki-Laki', 'BJM, 31 April 1995', '6289172314213', 'BJM', '', 'Pelanggan'),
 (4, 'Tretan', 'tretan', 'tretan', 'Laki-Laki', 'betulbanar, 15 Mei 1999', '089666714255', 'hantu mariaban', 'Cuci, Setrika', 'Karyawan'),
-(5, 'Mawar', 'mawar', '', 'Wanita', 'Banten, 17 Maret 1995', '6282172614255', '-', '', 'Pelanggan'),
+(5, 'mawar', 'mawar', '', 'Wanita', 'Bengkulu, 19 Desember 1998', '6282172614255', '-', '', 'Pelanggan'),
 (6, 'Ace', 'ace', 'ace', 'Wanita', 'Seoul, 19 Januari 1992', '08888314764', '-', 'Packing', 'Karyawan'),
 (7, 'Sharifah', 'sharifah', 'sharifah', 'Wanita', 'Depok, 21 Januari 1996', '6288705020024', 'Martapura', '', 'Pelanggan'),
 (8, 'Amelia', 'amel', 'amel', 'Wanita', 'Banjarbaru, 12 Agustus 2000', '089896716733', 'Banjarbaru', 'Pengering', 'Karyawan');
@@ -466,7 +432,7 @@ ALTER TABLE `biaya`
 -- AUTO_INCREMENT for table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `iddetail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `iddetail` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `gaji`
@@ -508,13 +474,13 @@ ALTER TABLE `jenis`
 -- AUTO_INCREMENT for table `promo`
 --
 ALTER TABLE `promo`
-  MODIFY `idpromo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpromo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `proses`
 --
 ALTER TABLE `proses`
-  MODIFY `idproses` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idproses` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`

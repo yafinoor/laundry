@@ -41,7 +41,7 @@
                                 <input type="number" name="harga" id="harga" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label>Jumlah</label>
+                                <label>Jumlah/Berat Cucian</label>
                                 <input type="number" name="jumlahku" class="form-control" required>
                             </div>
                             <button type="submit" name="tambah" class="btn btn-outline btn-primary">Tambah</button>
@@ -64,7 +64,7 @@
                                             <th>Jenis Laundry</th>
                                             <th>Sub Jenis Laundry</th>
                                             <th>Harga</th>
-                                            <th>Jumlah</th>
+                                            <th>Jumlah/Berat Cucian</th>
                                             <th>Sub Harga</th>
                                             <th><i class="fa fa-toggle-on"></i></th>
                                         </tr>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Biaya Ongkir</label>
-                                <input type="number" name="ongkir" class="form-control">
+                                <input type="number" name="ongkir" class="form-control" value="0" min="0">
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
@@ -167,7 +167,7 @@
         $notransaksi = date('Ymds');
         $seluruh     = $totalbelanja + $ongkir;
 
-        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,status,ongkir) VALUES ('$notransaksi','$id','$seluruh','$tgl','$layanan','$catatan','Proses','$ongkir')");
+        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,ongkir,diterima,bayar,konfirmasi) VALUES ('$notransaksi','$id','$seluruh','$tgl','$layanan','$catatan','$ongkir','$memori[nama]','Belum','Diterima')");
 
         foreach ($_SESSION['keranjang'] as $idjenis => $jumlah) {
             $query      = mysqli_query($kon, "SELECT * FROM jenis WHERE idjenis = '$idjenis'");

@@ -5,7 +5,6 @@
         background-image: url(images/ya1.jpg);
         background-repeat: no-repeat;
         background-size: cover;
-        background-position-y: 110px;
     };
 </style>
         <div class="container">
@@ -15,6 +14,11 @@
             <br>
             <br>
             <br>
+            <?php if($memori['id']!=''){?> 
+                <div class="alert alert-warning alert-dismissible">
+                    Selamat Datang, <a href="profil.php?id=<?=$memori['id'] ?>" class="alert-link"><?= $memori['nama'] ?></a>.
+                </div>
+            <?php } ?>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="best_shoes">

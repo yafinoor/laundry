@@ -58,7 +58,7 @@
                 </ul>
                 <!-- /.navbar-top-links -->
 
-<div class="navbar-default sidebar" role="navigation">
+<div class="navbar-default sidebar" role="navigation" style="overflow-y: scroll; height: 600px;">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
             <li>
@@ -122,6 +122,38 @@
                     <li>
                         <a href="pendapatan1.php"><i class="fa fa-battery-4 fa-fw"></i> Tahunan</a>
                     </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-tasks fa-fw"></i> Laporan<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="gaji.php"><i class="fa fa-money fa-fw"></i> Gaji Karyawan</a>
+                    </li>
+                    <li>
+                        <a href="masuk.php"><i class="fa fa-th fa-fw"></i> Inventori Masuk</a>
+                    </li>
+                    <li>
+                        <a href="rusak.php"><i class="fa fa-th-list fa-fw"></i> Inventori Rusak</a>
+                    </li>
+                    <li>
+                        <a href="repair.php"><i class="fa fa-th-list fa-fw"></i> Inventori Perbaikan</a>
+                    </li>
+                    <li>
+                        <a href="transaksi.php"><i class="fa fa-get-pocket fa-fw"></i> Transaksi</a>
+                    </li>
+                    <li>
+                        <a href="transaksi.php?nota"><i class="fa fa-twitch fa-fw"></i> Nota</a>
+                    </li>
+                    <li>
+                        <a href="promo.php"><i class="fa fa-heart fa-fw"></i> Promo</a>
+                    </li>
+                    <li>
+                        <a href="pendapatan.php"><i class="fa fa-archive fa-fw"></i> Pendapatan</a>
+                    </li>
+                    <li>
+                        <a href="index.php"><i class="fa fa-star fa-fw"></i> Grafik</a>
+                    </li><br><br>
                 </ul>
             </li>
         </ul>

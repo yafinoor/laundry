@@ -12,12 +12,12 @@
                                     <th>No</th>
                                     <th>Waktu (WITA)</th>
                                     <th>No.Transaksi</th>
-                                    <th>Sub Total</th>
-                                    <th>Ongkir</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
+                                    <th>Yang Bertugas</th>
                                     <th>Layanan</th>
+                                    <th>Bayar</th>
                                     <th>Catatan</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody class="table-light">
@@ -28,14 +28,25 @@
                                                     <td><?= $no++; ?></td>
                                                     <td><?= date('d/m/Y,H:i',strtotime($data['tgl'])) ?></td>
                                                     <td>
-                                                        <a href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
+                                                        <a style="color:blue" href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
                                                     </td>
-                                                    <td><?= number_format($data['total']-$data['ongkir'],0,'.','.') ?></td>
-                                                    <td><?= number_format($data['ongkir'],0,'.','.') ?></td>
-                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
-                                                    <td><a style="color: blue" target="_blank" href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>"><?= $data['status'] ?></a></td>
+                                                    <td><?= $data['diterima'] ?></td>
                                                     <td><?= $data['layanan'] ?></td>
+                                                    <td><?= $data['bayar'] ?></td>
                                                     <td><?= $data['catatan'] ?></td>
+                                                    <td>
+                                                    <?php 
+                                                        $ohh = $data['notransaksi'];
+                                                        $gini = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$ohh' ORDER BY waktu DESC");
+                                                        $lah = mysqli_fetch_array($gini);
+                                                        if($lah['ket']=='Selesai'){ ?>
+                                                            <a href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>" class="btn btn-warning btn-sm">Selesai</a>
+                                                        <?php }else if($data['konfirmasi']!='Diterima'){
+                                                            echo 'Proses';
+                                                        }else if($data['konfirmasi']=='Diterima'){ ?>
+                                                            <a href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>" class="btn btn-warning btn-sm">Proses</a><?php
+                                                        } ?></td>
+                                                    <td><?= number_format($data['total'],0,'.','.') ?></td>
                                                 </tr>
                                         <?php } ?> 
                                     <?php if(mysqli_num_rows($query)<=0){

@@ -28,7 +28,15 @@
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <input class="form-control" type="text" name="ket" placeholder="ex: Dicuci oleh... " required>
+                                <select name="ket" class="form-control">
+                                    <option value="Dijemput oleh">Dijemput oleh</option>
+                                    <option value="Dicuci oleh">Dicuci oleh</option>
+                                    <option value="Dikeringkan oleh">Dikeringkan oleh</option>
+                                    <option value="Disetrika oleh">Disetrika oleh</option>
+                                    <option value="Dipacking oleh">Dipacking oleh</option>
+                                    <option value="Diantar oleh">Diantar oleh</option>
+                                    <option value="Selesai">Selesai</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Nama Karyawan</label>
@@ -66,7 +74,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $no=1; $proses = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$notransaksi' ORDER BY waktu DESC");
+                                <?php $no=1; $proses = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$notransaksi' ORDER BY waktu ASC");
                                     while($data = mysqli_fetch_array($proses)){ ?>
                                         <tr class="odd gradeX">
                                                 <td><?= $no++; ?></td>

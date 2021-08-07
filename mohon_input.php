@@ -32,11 +32,11 @@
                                 <label>Harga</label>
                                 <input type="number" class="email-bt form-control" name="harga" id="harga" readonly>
                             <div class="form-group">
-                                <label>Jumlah</label>
+                                <label>Jumlah/Berat Cucian</label>
                                 <input type="number" name="jumlahku" class="email-bt form-control" required>
                             </div>
                             <button type="submit" name="tambah" class="btn btn-outline btn-primary">Tambah</button>
-                            <button type="button" class="btn btn-outline btn-default"><a href="transaksi_bersih.php" style="color: black; text-decoration: none">Bersihkan Daftar Belanja</a></button>
+                            <button type="button" class="btn btn-outline btn-default"><a href="mohon_bersih.php" style="color: black; text-decoration: none">Bersihkan Daftar Belanja</a></button>
                         </form>
                     </div>
                     <!-- /.panel-body -->
@@ -55,7 +55,7 @@
                                             <th>Jenis Laundry</th>
                                             <th>Sub Jenis Laundry</th>
                                             <th>Harga</th>
-                                            <th>Jumlah</th>
+                                            <th>Jumlah/Berat Cucian</th>
                                             <th>Sub Harga</th>
                                             <th><i class="fa fa-toggle-on"></i></th>
                                         </tr>
@@ -93,6 +93,12 @@
                                     <option value="Antar Jemput">Antar Jemput</option>
                                     <option value="Jemput">Jemput</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <?php $qr = mysqli_query($kon, "SELECT * FROM user WHERE id = '$memori[id]'");
+                                $rt = mysqli_fetch_array($qr); ?>
+                                <input type="text" class="email-bt form-control" value="<?= $rt['alamat'] ?>" readonly/>
                             </div>
                             <div class="form-group">
                                 <label>Catatan</label>
@@ -149,7 +155,7 @@
         $catatan     = $_REQUEST['catatan'];
         $notransaksi = date('Ymds');
 
-        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,status,konfirmasi) VALUES ('$notransaksi','$memori[id]','$totalbelanja','$tgl','$layanan','$catatan','Proses','Menunggu')");
+        $hasil = mysqli_query($kon,"INSERT INTO transaksi (notransaksi,id,total,tgl,layanan,catatan,konfirmasi,bayar) VALUES ('$notransaksi','$memori[id]','$totalbelanja','$tgl','$layanan','$catatan','Menunggu','Belum')");
 
         foreach ($_SESSION['keranjang'] as $idjenis => $jumlah) {
             $query      = mysqli_query($kon, "SELECT * FROM jenis WHERE idjenis = '$idjenis'");
@@ -163,7 +169,7 @@
         }
 
         if($hasil){
-            ?> <script>alert('Pembelian Sukses.'); window.location = 'mohon.php';</script><?php
+            ?> <script>alert('Permohonan berhasil dikirim, tunggu konfirmasi Admin.'); window.location = 'mohon.php';</script><?php
             unset($_SESSION['keranjang']);
         }else{
             ?> <script>alert('Gagal, cek kembali!.'); window.location = 'mohon_input.php';</script><?php

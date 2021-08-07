@@ -18,7 +18,7 @@
                                         <th>Jenis</th>
                                         <th>Sub Jenis</th>
                                         <th>Harga (Rp)</th>
-                                        <th>Keterangan</th>
+                                        <th>Waktu Pengerjaan</th>
                                         <th><i class="fa fa-toggle-on"></i></th>
                                     </tr>
                                 </thead>

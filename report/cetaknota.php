@@ -13,7 +13,7 @@
   	<link rel="icon" type="image/png" href="../images/logo.png">
     <title>Rahima Laundry</title>
 	<style>
-		hr{ border: 2px; border-style: solid; width: 82%; } .wew{ margin-right: 15%; } .wow{ margin-left: 9%; float: left } #kiri{width: 50%; height: 100px; float:left; font-weight: normal; } #kanan{width: 50%; height: 100px; float:right; font-weight: normal; } th{text-align:center;}
+		hr{ border: 2px; border-style: solid; width: 82%; } .wew{ margin-right: 15%; } .wow{ margin-left: 9%; float: left } #kiri{width: 80%; height: 100px; float:left; font-weight: normal; } #kanan{width: 20%; height: 100px; float:right; font-weight: normal; }  th{text-align:center;}
 	</style>
 </head>
 <body><br>
@@ -39,8 +39,8 @@
             <th>No</th>
             <th>Jenis</th>
             <th>Sub Jenis</th>
-            <th>Jumlah</th>
             <th>Harga (Rp)</th>
+            <th>Jumlah/Berat Cucian</th>
             <th>Sub Harga (Rp)</th>
         </tr>
     </thead>
@@ -53,8 +53,8 @@ while( $data = mysqli_fetch_array($detail) ) :
 		<td><?= $i++; ?></td>
 		<td><?= $data['jenisny'] ?></td>
     <td><?= $data['subjenisny'] ?></td>
-    <td><?= $data['jumlah'] ?></td>
     <td><?= number_format($data['hargany'],0,'.','.')  ?></td>
+    <td><?= $data['jumlah'] ?></td>
     <td><?= number_format($data['subharga'],0,'.','.')  ?></td>
 </tr>
 <?php $total+=$data['subharga']; ?>
@@ -72,12 +72,48 @@ while( $data = mysqli_fetch_array($detail) ) :
 	<td style="font-weight: bold;text-align: center;"><?= number_format($total+$now['ongkir'],0,'.','.')  ?></td>
 </tr>
   </table>
-  Petunjuk atau Catatan :
+
+<div class="container">
+	<div style="width: 45%; float: LEFT;">
+  <table class="table table-bordered table-sm" border="1px" style="font-weight: 400;">
+    <thead class="text-center">
+        <tr>
+            <th>No</th>
+            <th>Waktu (WITA)</th>
+            <th>Keterangan</th>
+            <th>Nama Karyawan</th>
+        </tr>
+    </thead>
+		<tbody>
+    <?php $no=1; $query = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$notransaksi' ORDER BY waktu ASC");
+        while($data = mysqli_fetch_array($query)){ ?>
+            <tr class="odd gradeX text-center" style="color:black">
+                <td><?= $no++; ?></td>
+                <td><?= date('d/m/Y,H:i',strtotime($data['waktu'])) ?></td>
+                <td><?= $data['ket'] ?></td>
+                <td><?= $data['karyawan'] ?></td>
+                </tr>
+        <?php } ?>
+		</tbody>
+  </table>
+  </div>
+  <div style="float: RIGHT; width: 52%;">
+  	Petunjuk atau Catatan :
   <ol>
   	<li style="font-weight: normal;">Sampaikan kepada karyawan yang bertugas di Toko jika ada Pakaian yang luntur untuk dipisahkan.</li>
   	<li style="font-weight: normal;">Pengembalian Laundry harus disertai dengan Nota.</li>
   	<li style="font-weight: normal;">Pengaduan maksimal 1x24 jam setelah laundry diterima, disertai Nota.</li>
   	<li style="font-weight: normal;">Laundry yang tidak diambil lebih dari 14 hari setelah ada pemberitahuan selesai, bukan menjadi tanggung jawab kami.</li>
   </ol>
+  </div>
+</div>
 </div>	
-<?php require('zzz.php') ?> 
+<div class="container-fluid">
+	<div id="kiri">
+	</div>
+	<div id="kanan">
+		Mengetahui,<br><br><br>
+		Penanggung Jawab
+	</div>
+</div>
+<script>window.print()</script>

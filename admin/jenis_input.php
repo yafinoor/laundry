@@ -40,7 +40,7 @@
                                 <input class="form-control" type="number" name="harga" required>
                             </div>
                             <div class="form-group">
-                                <label>Keterangan</label>
+                                <label>Waktu Pengerjaan</label>
                                 <input class="form-control" type="text" name="ket" required>
                             </div>
                             <button type="submit" name="simpan" class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Simpan</button>

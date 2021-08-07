@@ -42,5 +42,9 @@
 	}else if (isset($_GET['id']) AND $_GET['level'] == 'karyawan') {
 		mysqli_query($kon, "DELETE FROM user WHERE id='$_REQUEST[id]'");
 		?> <script>window.location='karyawan.php';</script> <?php
+	// promo
+	}else if (isset($_GET['idpromo'])) {
+		mysqli_query($kon, "DELETE FROM promo WHERE idpromo='$_REQUEST[idpromo]'");
+		?> <script>window.location='promo.php';</script> <?php
 	}
 ?>

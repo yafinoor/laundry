@@ -43,7 +43,7 @@
                                 <input class="form-control" type="number" name="harga" value="<?= $data['harga'] ?>" required>
                             </div>
                             <div class="form-group">
-                                <label>Keterangan</label>
+                                <label>Waktu Pengerjaan</label>
                                 <input class="form-control" type="text" value="<?= $data['ket'] ?>" name="ket" required>
                             </div>
                             <button type="submit" name="simpan" class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Ubah</button>

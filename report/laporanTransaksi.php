@@ -33,12 +33,12 @@ require "../kon.php";
         <th>No</th>
         <th>Waktu (WITA)</th>
         <th>No.Transaksi <br>& Nama Pelanggan</th>
-        <th>Sub Total</th>
-        <th>Ongkir</th>
-        <th>Total</th>
-        <th>Status</th>
+        <th>Yang Bertugas</th>
         <th>Layanan</th>
+        <th>Bayar</th>
         <th>Catatan</th>
+        <th>Status</th>
+        <th>Total</th>
       </tr>
     </thead>
 <?php 
@@ -49,12 +49,17 @@ while( $data = mysqli_fetch_array($result) ) :
 		<td><?= $i++; ?></td>
 		<td><?= date('d/m/Y,H:i',strtotime($data['tgl'])) ?></td>
 		<td><?= $data['notransaksi'].' '.$data['nama'] ?></td>
-    <td><?= number_format($data['total']-$data['ongkir'],0,'.','.') ?></td>
-    <td><?= number_format($data['ongkir'],0,'.','.') ?></td>
-    <td><?= number_format($data['total'],0,'.','.') ?></td>
-    <td><?= $data['status'] ?></td>
+    <td><?= $data['diterima'] ?></td>
     <td><?= $data['layanan'] ?></td>
+    <td><?= $data['bayar'] ?></td>
     <td><?= $data['catatan'] ?></td>
+    <td><?php $gini = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$data[notransaksi]'"); $lah = mysqli_fetch_array($gini);
+    		if($lah['ket']=='Selesai'){
+    			echo "Selesai";
+    		}else{
+    			echo "Belum";
+    		} ?></td>
+    <td><?= number_format($data['total'],0,'.','.') ?></td>
 </tr>
 <?php endwhile; ?>
   </table>

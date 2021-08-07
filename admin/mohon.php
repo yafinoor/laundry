@@ -18,7 +18,6 @@
                                         <th>Waktu (WITA)</th>
                                         <th>No.Transaksi <br>& Nama Pelanggan</th>
                                         <th>Total</th>
-                                        <th>Ongkir</th>
                                         <th>Layanan</th>
                                         <th>Catatan</th>
                                         <th>Konfirmasi</th>
@@ -36,7 +35,6 @@
                                                         <?= $data['nama'] ?>
                                                     </td>
                                                     <td><?= number_format($data['total'],0,'.','.') ?></td>
-                                                    <td><?= number_format($data['ongkir'],0,'.','.') ?></td>
                                                     <td><?= $data['layanan'] ?></td>
                                                     <td><?= $data['catatan'] ?></td>
                                                     <td><?= $data['konfirmasi'] ?></td>

@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Ongkir</label>
-                                <input class="form-control" type="number" name="ongkir" min="1000" value="<?= $data['ongkir'] ?>" required>
+                                <input class="form-control" type="number" name="ongkir" value="<?= $data['ongkir'] ?>" required>
                                 <input type="hidden" name="total" value="<?= $data['total'] ?>">
                             </div>
                             <div class="form-group">
@@ -62,7 +62,7 @@
     $ongkir      = $_REQUEST['ongkir'];
     $konfirmasi  = $_REQUEST['konfirmasi'];
 
-    $ubah = mysqli_query($kon,"UPDATE transaksi SET total = '$total', ongkir = '$ongkir', konfirmasi = '$konfirmasi' WHERE notransaksi = '$notransaksi'");
+    $ubah = mysqli_query($kon,"UPDATE transaksi SET total = '$total', ongkir = '$ongkir', konfirmasi = '$konfirmasi', diterima = '$memori[nama]' WHERE notransaksi = '$notransaksi'");
     ?> <script>alert("Berhasil Diubah, Cek Data Transaksi");window.location='mohon.php';</script> <?php
   }
 ?>

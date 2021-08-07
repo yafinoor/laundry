@@ -47,6 +47,7 @@
                            <?php if($memori['level']=='Pelanggan'){ ?>
                               <a class="nav-item nav-link" href="transaksi.php">Transaksi</a>
                               <a class="nav-item nav-link" href="mohon.php">Permohonan Antar Jemput</a>
+                              <a class="nav-item nav-link" href="profil.php?id=<?=$memori['id'] ?>">Profil</a>
                               <a class="nav-item nav-link" href="keluar.php">Keluar</a>
                            <?php }else{ ?>
                            <a class="nav-item nav-link" href="lokasi.php">Lokasi</a>

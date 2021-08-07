@@ -37,11 +37,11 @@
                                 <input class="form-control" type="number" name="ongkir" value="<?= $data['ongkir'] ?>" required>
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status" required>
-                                    <option value="<?= $data['status'] ?>"><?= $data['status'] ?></option>
-                                    <option value="Proses">Proses</option>
-                                    <option value="Selesai">Selesai</option>
+                                <label>Bayar</label>
+                                <select class="form-control" name="bayar" required>
+                                    <option value="<?= $data['bayar'] ?>"><?= $data['bayar'] ?></option>
+                                    <option value="Sudah">Sudah</option>
+                                    <option value="Belum">Belum</option>
                                 </select>
                             </div>
                             <button type="submit" name="simpan" class="btn btn-outline btn-primary"><i class="fa fa-check-square"></i> Ubah</button>
@@ -66,9 +66,9 @@
     $total       = $_REQUEST['total']-$_REQUEST['ongkirLama']+$_REQUEST['ongkir'];
     $layanan     = $_REQUEST['layanan'];
     $ongkir      = $_REQUEST['ongkir'];
-    $status      = $_REQUEST['status'];
+    $bayar       = $_REQUEST['bayar'];
 
-    $ubah = mysqli_query($kon,"UPDATE transaksi SET total = '$total', layanan = '$layanan', ongkir = '$ongkir', status = '$status' WHERE notransaksi = '$notransaksi'");
+    $ubah = mysqli_query($kon,"UPDATE transaksi SET total = '$total', layanan = '$layanan', ongkir = '$ongkir', bayar = '$bayar' WHERE notransaksi = '$notransaksi'");
     ?> <script>alert("Berhasil Diubah");window.location='transaksi.php';</script> <?php
   }
 ?>

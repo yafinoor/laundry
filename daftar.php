@@ -10,10 +10,10 @@
                             <thead class="success table-dark">
                                 <tr>
                                     <th>No</th>
-                                        <th>Jenis</th>
-                                        <th>Sub Jenis</th>
-                                        <th>Harga (Rp)</th>
-                                        <th>Keterangan</th>
+                                    <th>Jenis</th>
+                                    <th>Sub Jenis</th>
+                                    <th>Harga (Rp)</th>
+                                    <th>Waktu Pengerjaan</th>
                                 </tr>
                             </thead>
                             <tbody>

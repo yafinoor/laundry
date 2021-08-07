@@ -13,30 +13,43 @@
                                     <th>No</th>
                                     <th>Waktu (WITA)</th>
                                     <th>No.Transaksi</th>
-                                    <th>Total</th>
-                                    <th>Ongkir</th>
                                     <th>Layanan</th>
                                     <th>Catatan</th>
                                     <th>Konfirmasi</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody class="table-light">
                                     <?php $no=1; 
-                                    $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' AND konfirmasi = 'Menunggu' ORDER BY tgl DESC");
+                                    $query = mysqli_query($kon, "SELECT * FROM transaksi INNER JOIN user ON transaksi.id = user.id WHERE username = '$memori[username]' AND layanan = 'Antar Jemput' OR layanan = 'Jemput' ORDER BY tgl DESC");
                                         while($data = mysqli_fetch_array($query)){ ?>
                                             <tr class="odd gradeX" style="color:black">
                                                     <td><?= $no++; ?></td>
                                                     <td><?= date('d/m/Y, H:i',strtotime($data['tgl'])) ?></td>
                                                     <td>
-                                                        <a href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
+                                                        <a style="color:blue" href="transaksi_detail.php?notransaksi=<?= $data['notransaksi'] ?>"><?= $data['notransaksi'] ?></a>
                                                     </td>
-                                                    <td>Rp. <?= number_format($data['total'],0,'.','.') ?></td>
-                                                    <td>Rp. <?= number_format($data['ongkir'],0,'.','.') ?></td>
                                                     <td><?= $data['layanan'] ?></td>
                                                     <td><?= $data['catatan'] ?></td>
                                                     <td><?= $data['konfirmasi'] ?></td>
-                                                    <td><a href="mohon_batal.php?notransaksi=<?php echo $data['notransaksi'] ?>" class="btn btn-outline btn-danger btn-sm">Hapus</a></td>
+                                                    <td>
+                                                    <?php 
+                                                        $ohh = $data['notransaksi'];
+                                                        $gini = mysqli_query($kon, "SELECT * FROM proses WHERE notransaksi = '$ohh' ORDER BY waktu DESC");
+                                                        $lah = mysqli_fetch_array($gini);
+                                                        if($lah['ket']=='Selesai'){ ?>
+                                                            <a href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>" class="btn btn-warning btn-sm">Selesai</a>
+                                                        <?php }else if($data['konfirmasi']!='Diterima'){
+                                                            echo 'Proses';
+                                                        }else if($data['konfirmasi']=='Diterima'){ ?>
+                                                            <a href="proses.php?notransaksi=<?php echo $data['notransaksi']; ?>" class="btn btn-warning btn-sm">Proses</a><?php
+                                                        } ?></td>
+                                                    <td>Rp. <?= number_format($data['total'],0,'.','.') ?></td>
+                                                    <td><?php if($data['konfirmasi']!='Diterima'){ ?>
+                                                        <a href="mohon_batal.php?notransaksi=<?php echo $data['notransaksi'] ?>" class="btn btn-outline btn-danger btn-sm">Hapus</a>
+                                                    <?php } ?></td>
                                                 </tr>
                                         <?php } ?> 
                                     <?php if(mysqli_num_rows($query)<=0){
